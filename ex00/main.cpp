@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:41:32 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/22 22:58:05 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:06:53 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int main()
 {
+    Bureaucrat Bq;
+    exit(0);
     Bureaucrat B(48, "numnum");
+
     //---------------Grade higher test---------------
     std::cout << "\n                  TEST 01\n";
     try

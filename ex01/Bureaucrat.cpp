@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 15:48:01 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/23 13:15:07 by azaghlou         ###   ########.fr       */
+/*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
+/*   Updated: 2023/10/23 17:28:15 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,17 @@ void    Bureaucrat::DecrementGrade()
     this->grade--;
     if (grade < 1)
         throw(Bureaucrat::GradeTooLowException());
+}
+
+//---------------------------------------------------------------//
+
+void    Bureaucrat::signForm(Form &obj)
+{
+    if (obj.GetSignBoolean())
+        std::cout << this->getName() <<  " signed "  << obj.GetName() << std::endl;
+    else
+        std::cout << this->getName() <<  " couldn't sign "  << obj.GetName() <<  " because their grade dont allow that" << std::endl;
+        
 }
 
 //-------------------------------Operator assignement--------------------------------
