@@ -6,49 +6,107 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:48:01 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/22 13:36:24 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:46:28 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
+//-----------------------------------Constructors------------------------------------
+
 Bureaucrat::Bureaucrat() : name("default")
 {
     this->grade = 0;
+//  Because you dident identify a value to the grade variable,
+//  by default it's set to zero so its lower than the range.
+    throw(Bureaucrat::GradeTooLowException());
 }
 
 Bureaucrat::Bureaucrat(int G) : name("default")
 {
     this->grade = G;
+    if (grade > 150)
+        throw(Bureaucrat::GradeTooHighException());
+    if (grade < 1)
+        throw(Bureaucrat::GradeTooLowException());
 }
 
 Bureaucrat::Bureaucrat(int G, std::string N) : name(N)
 {
     this->grade = G;
+    if (this->grade > 150)
+    {
+        // std::cout << "JAAAAAA!\n";
+        throw(Bureaucrat::GradeTooHighException());
+    }
+    if (this->grade < 1)
+        throw(Bureaucrat::GradeTooLowException());
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat &obj)
 {
     *this = obj;
+    if (grade > 150)
+        throw(Bureaucrat::GradeTooHighException());
+    else if (grade < 1)
+        throw(Bureaucrat::GradeTooLowException());
 }
+
+//------------------------------------Destructor-------------------------------------
 
 Bureaucrat::~Bureaucrat()
 {}
 
+//------------------------------------Exceptions-------------------------------------
+
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-    std::cout << "It seems that you entered a grade lower than" << 
-    "what it should be, it should be not lower than 1" << std::endl;
+    return ("It seems that you entered a grade lower than what it should be");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-    std::cout << "It seems that you entered a grade higher than" << 
-    "what it should be, it should be not higher than 150" << std::endl;
+    return ("It seems that you entered a grade higher than what it should be");
 }
+
+//--------------------------------------Getters---------------------------------------
+
+const std::string Bureaucrat::getName() const
+{
+    return(this->name);
+}
+
+int Bureaucrat::getGrade() const
+{
+    return(this->grade);
+}
+
+//---------------------------Grade Increment and Decrement----------------------------
+
+void    Bureaucrat::IncrementGrade()
+{
+    this->grade++;
+    if (grade > 150)
+        throw(Bureaucrat::GradeTooHighException());
+}
+
+void    Bureaucrat::DecrementGrade()
+{
+    this->grade--;
+    if (grade < 1)
+        throw(Bureaucrat::GradeTooLowException());
+}
+
+//-------------------------------Operator assignement--------------------------------
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat &obj)
 {
     this->grade = obj.grade;
     return *this;
+}
+
+std::ostream & operator<<( std::ostream & o, const Bureaucrat & rhs)
+{
+	o << "Bureaucrat " << rhs.getName() << " has a grade " << rhs.getGrade();
+	return (o);
 }

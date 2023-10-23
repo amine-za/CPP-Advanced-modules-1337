@@ -4,7 +4,7 @@ CC = c++
 
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = main.cpp
+SRC = main.cpp Bureaucrat.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -22,5 +22,5 @@ fclean : clean
 re : fclean all
 
 my : re
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 	clear

@@ -3,11 +3,7 @@
 
 #include <iostream>
 #include <string>
-// #include "GradeTooHighException.hpp"
-// #include "GradeTooLowException.hpp"
-
-// class GradeTooLowException;
-// class GradeTooHighException;
+#include <stdexcept>
 
 class Bureaucrat
 {
@@ -22,8 +18,14 @@ class Bureaucrat
         Bureaucrat(Bureaucrat &obj);
         ~Bureaucrat();
 
-        // GradeTooLowException GradeTooLowException;
-        // GradeTooHighException GradeTooHighException;
+        const std::string getName() const;
+        int getGrade() const;
+
+        void    IncrementGrade();
+        void    DecrementGrade();
+
+        Bureaucrat  &operator=(Bureaucrat &obj);
+
         class GradeTooLowException: public std::exception
         {
             public:
@@ -37,8 +39,8 @@ class Bureaucrat
                 virtual const char *what() const throw();
     
         };
-
-        Bureaucrat  &operator=(Bureaucrat &obj);
 };
+
+std::ostream & operator<<( std::ostream & o, const Bureaucrat & rhs);
 
 #endif
