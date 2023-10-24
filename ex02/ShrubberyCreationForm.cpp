@@ -6,24 +6,24 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:56:10 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 18:21:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:32:15 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 //---------------------Construcotrs And Destructors---------------------//
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("none", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("the form", 145, 137)
 {
     this->Target = "default";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string N): AForm("none", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string N): AForm("the form", 145, 137)
 {
     this->Target = N;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj) : AForm("none", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj) : AForm("the form", 145, 137)
 {
     *this = obj;
 }
@@ -42,7 +42,7 @@ void    ShrubberyCreationForm::execute(Bureaucrat const &bureau) const
 {
     if (!this->GetSignBoolean())
         throw(FormNotSigned());
-    else if (this->GetSignGrade() > bureau.getGrade())
+    else if (this->GetSignGrade() < bureau.getGrade())
         throw(GradeDontPermit());
     else
     {

@@ -6,24 +6,24 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:31:09 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 18:20:32 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:32:15 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
 //---------------------Construcotrs And Destructors---------------------//
-RobotomyRequestForm::RobotomyRequestForm() : AForm("none", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("the form", 72, 45)
 {
     this->Target = "default";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string N): AForm("none", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(std::string N): AForm("the form", 72, 45)
 {
     this->Target = N;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &obj) : AForm("none", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &obj) : AForm("the form", 72, 45)
 {
     *this = obj;
 }
@@ -42,7 +42,7 @@ void    RobotomyRequestForm::execute(Bureaucrat const &bureau) const
 {
     if (!this->GetSignBoolean())
         throw(FormNotSigned());
-    else if (this->GetSignGrade() > bureau.getGrade())
+    else if (this->GetSignGrade() < bureau.getGrade())
         throw(GradeDontPermit());
     else
     {

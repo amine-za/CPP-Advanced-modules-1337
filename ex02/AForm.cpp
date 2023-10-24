@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:41:33 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 18:27:16 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:26:47 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ std::string AForm::GetName() const
 
 void    AForm::beSigned(Bureaucrat &obj)
 {
-    if (this->GetSignGrade() <= obj.getGrade()) // this mean that the grade of the Aform is greater and higher that the grade of the bureaucrate
+    if (this->GetSignGrade() >= obj.getGrade()) // this mean that the grade of the bureancrat is greater and higher that the grade of the form
         this->signd = true;
 }
 

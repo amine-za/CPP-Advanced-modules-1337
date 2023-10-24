@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:47:36 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 18:20:24 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:31:52 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 
 //---------------------Construcotrs And Destructors---------------------//
-PresidentialPardonForm::PresidentialPardonForm() : AForm("none", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("the form", 25, 5)
 {
     this->Target = "default";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string N): AForm("none", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string N): AForm("the form", 25, 5)
 {
     this->Target = N;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &obj) : AForm("none", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &obj) : AForm("the form", 25, 5)
 {
     *this = obj;
 }
@@ -43,7 +43,7 @@ void    PresidentialPardonForm::execute(Bureaucrat const &bureau) const
 {
     if (!this->GetSignBoolean()) //if the form is not signed 
         throw(FormNotSigned());
-    else if (this->GetSignGrade() > bureau.getGrade()) //if the bureaucrat's grade isn't high enough
+    else if (this->GetSignGrade() < bureau.getGrade()) //if the bureaucrat's grade isn't high enough
         throw(GradeDontPermit());
     else
         std::cout << this->GetTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
