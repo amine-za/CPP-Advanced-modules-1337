@@ -5,10 +5,9 @@
 #include <string>
 #include <stdexcept>
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Form;
-
+class AForm;
 
 class Bureaucrat
 {
@@ -17,21 +16,24 @@ class Bureaucrat
         const std::string name;
 
     public :
+//--------------------Construcotrs And Destructors--------------------//
         Bureaucrat();
         Bureaucrat(int G);
         Bureaucrat(int G, std::string N);
         Bureaucrat(Bureaucrat &obj);
         ~Bureaucrat();
 
+//-------------------------------Getters-------------------------------//
         const std::string getName() const;
         int getGrade() const;
 
+//--------------------------Membre function--------------------------//
+        void    executeForm(AForm const & form);
+        void    signForm(AForm &obj);
         void    IncrementGrade();
         void    DecrementGrade();
 
-        void    signForm(Form &obj);
-
-        Bureaucrat  &operator=(Bureaucrat &obj);
+//-------------------------Exceptions functions-------------------------//
 
         class GradeTooLowException: public std::exception
         {
@@ -44,6 +46,22 @@ class Bureaucrat
             public:
                 virtual const char *what() const throw();
         };
+        
+        class   FormNotSigned : public std::exception
+        {
+            public :
+                virtual const char *what() const throw();
+        };
+        
+        class   GradeDontPermit : public std::exception
+        {
+            public :
+                virtual const char *what() const throw();
+        };
+//---------------------operators assignement---------------------//
+
+        Bureaucrat  &operator=(Bureaucrat &obj);
+
 };
 
 std::ostream & operator<<( std::ostream & o, const Bureaucrat & rhs);

@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:18 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:27:33 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 Bureaucrat::Bureaucrat() : name("default")
 {
     this->grade = 1;
-//  Because you dident identify a value to the grade variable,
-//  by default it's set to zero so its lower than the range.
-    // throw(Bureaucrat::GradeTooLowException());
+    // By default i set the grade the the most higher one 
 }
 
 Bureaucrat::Bureaucrat(int G) : name("default")
@@ -94,15 +92,31 @@ void    Bureaucrat::DecrementGrade()
         throw(Bureaucrat::GradeTooLowException());
 }
 
-//---------------------------------------------------------------//
+//----------------------------------signForm function---------------------------------
 
-void    Bureaucrat::signForm(Form &obj)
+void    Bureaucrat::executeForm(AForm const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.GetName() << std::endl;
+    }
+    catch(AForm::FormNotSigned &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    catch(AForm::GradeDontPermit &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void    Bureaucrat::signForm(AForm &obj)
 {
     if (obj.GetSignBoolean())
         std::cout << this->getName() <<  " signed "  << obj.GetName() << std::endl;
     else
         std::cout << this->getName() <<  " couldn't sign "  << obj.GetName() <<  " because their grade dont allow that" << std::endl;
-        
 }
 
 //-------------------------------Operator assignement--------------------------------

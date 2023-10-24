@@ -5,7 +5,7 @@
 #include <string>
 #include <stdexcept>
 
-// #include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
 class Bureaucrat; 
 
@@ -18,20 +18,25 @@ class AForm
         const int GradeToExecute;
 
     public :
+//--------------------Construcotrs And Destructors--------------------//
         AForm();
         AForm(std::string N, int Gs, int Ge);
         AForm(AForm &obj);
         virtual ~AForm();
 
-        virtual std::string GetName() const = 0;
-        virtual bool        GetSignBoolean() const = 0;
-        virtual int         GetSignGrade() const = 0;
-        virtual int         GetExecuteGrade() const = 0;
+//-------------------------------Getters-------------------------------//
+        virtual std::string GetName() const;
+        virtual bool        GetSignBoolean() const;
+        virtual int         GetSignGrade() const;
+        virtual int         GetExecuteGrade() const;
 
-        virtual void    beSigned(Bureaucrat &obj) = 0;
+//--------------------------Membre functions--------------------------//
+        virtual void    beSigned(Bureaucrat &obj);
 
-        void    execute(Bureaucrat const & executor) const;
+        virtual void    execute(Bureaucrat const & executor) const = 0;
 
+
+//-------------------------Exceptions classes-------------------------//
         class GradeTooLowException: public std::exception
         {
             public:
@@ -45,7 +50,20 @@ class AForm
                 virtual const char *what() const throw();
     
         };
+          
+        class   FormNotSigned : public std::exception
+        {
+            public :
+                virtual const char *what() const throw();
+        };
+        
+        class   GradeDontPermit : public std::exception
+        {
+            public :
+                virtual const char *what() const throw();
+        };
 
+//---------------------copy operator assignement---------------------//
         AForm &operator=(AForm &obj);
 
 };

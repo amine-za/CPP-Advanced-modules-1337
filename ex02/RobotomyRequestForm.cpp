@@ -6,12 +6,13 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:31:09 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/23 23:51:00 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:20:32 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
+//---------------------Construcotrs And Destructors---------------------//
 RobotomyRequestForm::RobotomyRequestForm() : AForm("none", 72, 45)
 {
     this->Target = "default";
@@ -30,21 +31,42 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &obj) : AForm("none
 RobotomyRequestForm::~RobotomyRequestForm()
 {}
 
+//-------------------------------Getters-------------------------------//
 std::string    RobotomyRequestForm::GetTarget()
 {
     return (Target);
 }
 
-void    RobotomyRequestForm::execute()
+//---------------------------Membre function---------------------------//
+void    RobotomyRequestForm::execute(Bureaucrat const &bureau) const
 {
-    std::cout << "Occurrence of some drilling noises" << std::endl;
-    int random = std::rand() %50;
-    if (random == 0)
-        std::cout << this->GetName() << " has been robotomized successfully 50% of the time" << std::endl;
+    if (!this->GetSignBoolean())
+        throw(FormNotSigned());
+    else if (this->GetSignGrade() > bureau.getGrade())
+        throw(GradeDontPermit());
     else
-        std::cout << "The robotomy failed" << std::endl;
+    {
+        std::cout << "Occurrence of some drilling noises" << std::endl;
+        int random = std::rand() %50;
+        if (random == 0)
+            std::cout << this->GetName() << " has been robotomized successfully 50% of the time" << std::endl;
+        else
+            std::cout << "The robotomy failed" << std::endl;
+    }
 }
 
+//------------------------Exceptions functions------------------------//
+// const char *RobotomyRequestForm::FormNotSigned::what() const throw()
+// {
+//     return ("An error appearse, it seems that the form isn't signed");
+// }
+
+// const char *RobotomyRequestForm::GradeDontPermit::what() const throw()
+// {
+//     return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
+// }
+
+//-----------------------operators assignement-----------------------//
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm &obj)
 {
     this->Target = obj.Target;

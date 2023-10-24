@@ -6,12 +6,13 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:56:10 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/23 23:51:53 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:21:14 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
+//---------------------Construcotrs And Destructors---------------------//
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("none", 145, 137)
 {
     this->Target = "default";
@@ -30,34 +31,53 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &obj) : AForm
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {}
 
-std::string    ShrubberyCreationForm::GetTarget()
+//-------------------------------Getters-------------------------------//
+std::string    ShrubberyCreationForm::GetTarget() const
 {
     return (Target);
 }
 
-void    ShrubberyCreationForm::execute()
+//---------------------------Membre function---------------------------//
+void    ShrubberyCreationForm::execute(Bureaucrat const &bureau) const
 {
-    std::string tree = 
-    "      *\n"
-    "     ***\n"
-    "    *****\n"
-    "   *******\n"
-    "  *********\n"
-    "     | |\n";
-
-    std::ofstream file(this->GetTarget() + "_shrubbery");
-    if (!file)
+    if (!this->GetSignBoolean())
+        throw(FormNotSigned());
+    else if (this->GetSignGrade() > bureau.getGrade())
+        throw(GradeDontPermit());
+    else
     {
-        std::cout << "it looks like an error appears while creating the output file" << std::endl;
-        return;
+        std::string tree = 
+        "      *\n"
+        "     ***\n"
+        "    *****\n"
+        "   *******\n"
+        "  *********\n"
+        "     | |\n";
+
+        std::ofstream file(this->GetTarget() + "_shrubbery");
+        if (!file)
+        {
+            std::cout << "it looks like an error appears while creating the output file" << std::endl;
+            return;
+        }
+        file << tree;
     }
-    file << tree;
 }
 
+//------------------------Exceptions functions------------------------//
+// const char *ShrubberyCreationForm::FormNotSigned::what() const throw()
+// {
+//     return ("An error appearse, it seems that the form isn't signed");
+// }
 
+// const char *ShrubberyCreationForm::GradeDontPermit::what() const throw()
+// {
+//     return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
+// }
+
+//-----------------------operators assignement-----------------------//
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm &obj)
 {
     this->Target = obj.Target;
     return *this;
 }
-

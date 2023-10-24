@@ -6,12 +6,14 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:41:33 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/23 23:54:05 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:27:16 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "AForm.hpp"
+
+//--------------------Construcotrs And Destructors--------------------//
 
 AForm::AForm() : name("default"), GradeToSign(1), GradeToExecute(1)
 {
@@ -36,33 +38,37 @@ AForm::~AForm()
 {
 }
 
-//Aform sign grade should be higher than beraacrat grade to set the bool to true
+//-------------------------------Getters-------------------------------//
 
-// std::string AForm::GetName() const
-// {
-//     return (this->name);
-// }
+bool        AForm::GetSignBoolean() const
+{
+    return (this->signd);
+}
 
-// bool        AForm::GetSignBoolean() const
-// {
-//     return (this->signd);
-// }
+int         AForm::GetSignGrade() const
+{
+    return (this->GradeToSign);
+}
 
-// int         AForm::GetSignGrade() const
-// {
-//     return (this->GradeToSign);
-// }
+int         AForm::GetExecuteGrade() const
+{
+    return (this->GradeToExecute);
+}
 
-// int         AForm::GetExecuteGrade() const
-// {
-//     return (this->GradeToExecute);
-// }
+std::string AForm::GetName() const
+{
+    return (this->name);
+}
 
-// void    AForm::beSigned(Bureaucrat &obj)
-// {
-//     if (this->GetSignGrade() <= obj.getGrade()) // this mean that the grade of the Aform is greater and higher that the grade of the bureaucrate
-//         this->signd = true;
-// }
+//--------------------------Membre function--------------------------//
+
+void    AForm::beSigned(Bureaucrat &obj)
+{
+    if (this->GetSignGrade() <= obj.getGrade()) // this mean that the grade of the Aform is greater and higher that the grade of the bureaucrate
+        this->signd = true;
+}
+
+//-------------------------Exceptions functions-------------------------//
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
@@ -74,11 +80,17 @@ const char *AForm::GradeTooLowException::what() const throw()
     return ("It seems that you entered a grade lower than the bounds");
 }
 
-void    AForm::execute(Bureaucrat const & executor) const
+const char *AForm::FormNotSigned::what() const throw()
 {
-    
+    return ("An error appearse, it seems that the form isn't signed");
 }
 
+const char *AForm::GradeDontPermit::what() const throw()
+{
+    return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
+}
+
+//---------------------operators assignement---------------------//
 
 AForm &AForm::operator=(AForm &obj)
 {

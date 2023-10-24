@@ -4,7 +4,8 @@ CC = c++
 
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
-SRC = main.cpp 
+SRC = main.cpp AForm.cpp Bureaucrat.cpp \
+PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
