@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:41:33 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:26:47 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:52:14 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ const char *AForm::GradeTooLowException::what() const throw()
 
 const char *AForm::FormNotSigned::what() const throw()
 {
-    return ("An error appearse, it seems that the form isn't signed");
+    return ("It seems that the form isn't signed");
 }
 
 const char *AForm::GradeDontPermit::what() const throw()
 {
-    return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
+    return ("It seems that the grade of the bureaucrat dont permit to sing the form");
 }
 
 //---------------------operators assignement---------------------//

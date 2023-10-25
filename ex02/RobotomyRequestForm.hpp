@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include "AForm.hpp"
+#include <cstdlib>
+#include <random>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;

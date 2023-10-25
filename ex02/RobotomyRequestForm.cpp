@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:31:09 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:32:15 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:47:28 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void    RobotomyRequestForm::execute(Bureaucrat const &bureau) const
     else
     {
         std::cout << "Occurrence of some drilling noises" << std::endl;
-        int random = std::rand() %50;
-        if (random == 0)
+        std::random_device rand;
+        std::uniform_int_distribution<int> dist(1,2);
+        if (dist(rand) == 1)
             std::cout << this->GetName() << " has been robotomized successfully 50% of the time" << std::endl;
         else
             std::cout << "The robotomy failed" << std::endl;

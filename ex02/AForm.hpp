@@ -4,8 +4,10 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-
 #include "Bureaucrat.hpp"
+
+#define RESET_TEXT "\033[0m"
+#define BLUE_TEXT "\033[34m"
 
 class Bureaucrat; 
 
