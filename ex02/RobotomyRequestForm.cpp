@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:31:09 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:47:28 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:06:47 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,6 @@ void    RobotomyRequestForm::execute(Bureaucrat const &bureau) const
             std::cout << "The robotomy failed" << std::endl;
     }
 }
-
-//------------------------Exceptions functions------------------------//
-// const char *RobotomyRequestForm::FormNotSigned::what() const throw()
-// {
-//     return ("An error appearse, it seems that the form isn't signed");
-// }
-
-// const char *RobotomyRequestForm::GradeDontPermit::what() const throw()
-// {
-//     return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
-// }
 
 //-----------------------operators assignement-----------------------//
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm &obj)

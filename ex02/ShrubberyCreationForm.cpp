@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:56:10 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:32:15 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:06:58 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,6 @@ void    ShrubberyCreationForm::execute(Bureaucrat const &bureau) const
         file << tree;
     }
 }
-
-//------------------------Exceptions functions------------------------//
-// const char *ShrubberyCreationForm::FormNotSigned::what() const throw()
-// {
-//     return ("An error appearse, it seems that the form isn't signed");
-// }
-
-// const char *ShrubberyCreationForm::GradeDontPermit::what() const throw()
-// {
-//     return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
-// }
 
 //-----------------------operators assignement-----------------------//
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm &obj)

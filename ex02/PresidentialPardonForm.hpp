@@ -12,6 +12,7 @@ class PresidentialPardonForm : public AForm
 {
     private :
         std::string Target;
+
     public :
 
 //---------------------Construcotrs And Destructors---------------------//
@@ -25,19 +26,6 @@ class PresidentialPardonForm : public AForm
 
 //---------------------------Membre function---------------------------//
         void    execute(Bureaucrat const &obj) const;
-
-//------------------------Exceptions functions------------------------//
-        // class   FormNotSigned : public std::exception
-        // {
-        //     public :
-        //         virtual const char *what() const throw();
-        // };
-        
-        // class   GradeDontPermit : public std::exception
-        // {
-        //     public :
-        //         virtual const char *what() const throw();
-        // };
 
 //-----------------------operators assignement-----------------------//
         PresidentialPardonForm &operator=(PresidentialPardonForm &obj);

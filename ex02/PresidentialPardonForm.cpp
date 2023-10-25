@@ -6,12 +6,11 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 23:47:36 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:31:52 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:06:37 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
-
 
 //---------------------Construcotrs And Destructors---------------------//
 PresidentialPardonForm::PresidentialPardonForm() : AForm("the form", 25, 5)
@@ -48,17 +47,6 @@ void    PresidentialPardonForm::execute(Bureaucrat const &bureau) const
     else
         std::cout << this->GetTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
-
-//------------------------Exceptions functions------------------------//
-// const char *PresidentialPardonForm::FormNotSigned::what() const throw()
-// {
-//     return ("An error appearse, it seems that the form isn't signed");
-// }
-
-// const char *PresidentialPardonForm::GradeDontPermit::what() const throw()
-// {
-//     return ("An error appearse, it seems that the grade of the bureaucrat dont permit to sing the form");
-// }
 
 //-----------------------operators assignement-----------------------//
 PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm &obj)

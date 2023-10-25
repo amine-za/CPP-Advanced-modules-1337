@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:44:12 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:07 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:05:47 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ Form::~Form()
 {
 }
 
-//form sign grade should be higher than beraacrat grade to set the bool to true
-
 std::string Form::GetName() const
 {
     return (this->name);
@@ -59,7 +57,7 @@ int         Form::GetExecuteGrade() const
 
 void    Form::beSigned(Bureaucrat &obj)
 {
-    if (this->GetSignGrade() <= obj.getGrade()) // this mean that the grade of the form is greater and higher that the grade of the bureaucrate
+    if (this->GetSignGrade() >= obj.getGrade()) // this mean that the grade of the bureaucrate is greater than the grade of the form
         this->signd = true;
 }
 

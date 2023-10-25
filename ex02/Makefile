@@ -2,7 +2,7 @@ Name = ex02
 
 CC = c++
 
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp AForm.cpp Bureaucrat.cpp \
 PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp

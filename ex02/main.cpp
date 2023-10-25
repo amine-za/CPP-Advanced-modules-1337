@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:38:36 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 10:31:56 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:37:26 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 {
     //                                                      Test 01
     {
-        std::cout << "------------------Test 01 : Can sign all the forms------------------" << std::endl;
+        std::cout << "-------------------------Test 01 : Can sign all the forms-------------------------" << std::endl;
         Bureaucrat  bureau(5, "Bureau");
         PresidentialPardonForm pres("pres");
         ShrubberyCreationForm shrub("shrub");
@@ -40,7 +40,7 @@ int main()
     
     //                                                      Test 02
     {
-        std::cout << "\n\n--Test 02 : Can sign only the ShrubberyCreationForm and the RobotomyRequestForm forms--" << std::endl;
+        std::cout << "\n\n--Test 02 : Can sign only ShrubberyCreationForm and RobotomyRequestForm forms--" << std::endl;
         Bureaucrat  bureau(50, "Bureau");
 
         PresidentialPardonForm pres("pres");
@@ -61,7 +61,7 @@ int main()
     
     //                                                      Test 03
     {
-        std::cout << "\n\n----------------Test 03 : Can sign only the ShrubberyCreationForm form----------------" << std::endl;
+        std::cout << "\n\n------------Test 03 : Can sign only the ShrubberyCreationForm form------------" << std::endl;
         Bureaucrat  bureau(130, "Bureau");
         PresidentialPardonForm pres("pres");
         ShrubberyCreationForm shrub("shrub");
@@ -81,7 +81,7 @@ int main()
     
     //                                                      Test 04
     {
-        std::cout << "\n\n------------------Test 04 : Can't sign any form------------------" << std::endl;
+        std::cout << "\n\n-------------------------Test 04 : Can't sign any form-------------------------" << std::endl;
         Bureaucrat  bureau(147, "Bureau");
         PresidentialPardonForm pres("pres");
         ShrubberyCreationForm shrub("shrub");

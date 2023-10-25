@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include "AForm.hpp"
-#include <cstdlib>
 #include <random>
 #include "Bureaucrat.hpp"
 
@@ -14,6 +13,7 @@ class RobotomyRequestForm : public AForm
 {
     private :
         std::string Target;
+        
     public :
 
 //---------------------Construcotrs And Destructors---------------------//
@@ -27,19 +27,6 @@ class RobotomyRequestForm : public AForm
 
 //---------------------------Membre function---------------------------//
         void    execute(Bureaucrat const &obj) const;
-
-//------------------------Exceptions functions------------------------//
-        // class   FormNotSigned : public std::exception
-        // {
-        //     public :
-        //         virtual const char *what() const throw();
-        // };
-        
-        // class   GradeDontPermit : public std::exception
-        // {
-        //     public :
-        //         virtual const char *what() const throw();
-        // };
 
 //-----------------------operators assignement-----------------------//
         RobotomyRequestForm &operator=(RobotomyRequestForm &obj);

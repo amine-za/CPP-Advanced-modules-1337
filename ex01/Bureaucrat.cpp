@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:18 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:41:46 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 Bureaucrat::Bureaucrat() : name("default")
 {
     this->grade = 1;
-//  Because you dident identify a value to the grade variable,
-//  by default it's set to zero so its lower than the range.
-    // throw(Bureaucrat::GradeTooLowException());
+    // By default i set the grade to the highest one so its set to "1"
 }
 
 Bureaucrat::Bureaucrat(int G) : name("default")

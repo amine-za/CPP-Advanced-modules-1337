@@ -5,6 +5,8 @@
 #include <string>
 #include <stdexcept>
 
+#include <string>
+#include <stdexcept>
 #include "AForm.hpp"
 
 class AForm;
