@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:55:57 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:00:24 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,20 @@ int Bureaucrat::getGrade() const
 
 void    Bureaucrat::IncrementGrade()
 {
-    this->grade++;
-    if (grade > 150)
-        throw(Bureaucrat::GradeTooHighException());
+    // this->grade++;
+    // if (grade > 150)
+    //     throw(Bureaucrat::GradeTooHighException());
+    if (this->grade > 1)
+        this->grade--;
 }
 
 void    Bureaucrat::DecrementGrade()
 {
-    this->grade--;
-    if (grade < 1)
-        throw(Bureaucrat::GradeTooLowException());
+    // this->grade--;
+    // if (grade < 1)
+    //     throw(Bureaucrat::GradeTooLowException());
+    if (this->grade < 150)
+        this->grade++;
 }
 
 //----------------------------------signForm function---------------------------------

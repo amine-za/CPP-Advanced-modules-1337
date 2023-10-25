@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:44:12 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 11:05:47 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:22:14 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void    Form::beSigned(Bureaucrat &obj)
 {
     if (this->GetSignGrade() >= obj.getGrade()) // this mean that the grade of the bureaucrate is greater than the grade of the form
         this->signd = true;
+    else
+        throw(Form::CantSignForm());
 }
 
 const char *Form::GradeTooHighException::what() const throw()
@@ -69,6 +71,11 @@ const char *Form::GradeTooHighException::what() const throw()
 const char *Form::GradeTooLowException::what() const throw()
 {
     return ("It seems that you entered a grade lower than the bounds");
+}
+
+const char *Form::CantSignForm::what() const throw()
+{
+    return ("That Form cant be signed by that Bureaucrat");
 }
 
 Form &Form::operator=(Form &obj)

@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:48:01 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 10:41:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:49:41 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,20 @@ int Bureaucrat::getGrade() const
 
 void    Bureaucrat::IncrementGrade()
 {
-    this->grade++;
-    if (grade > 150)
-        throw(Bureaucrat::GradeTooHighException());
+    // this->grade++;
+    // if (grade > 150)
+    //     throw(Bureaucrat::GradeTooHighException());
+    if (this->grade > 1)
+        this->grade--;
 }
 
 void    Bureaucrat::DecrementGrade()
 {
-    this->grade--;
-    if (grade < 1)
-        throw(Bureaucrat::GradeTooLowException());
+    // this->grade--;
+    // if (grade < 1)
+    //     throw(Bureaucrat::GradeTooLowException());
+    if (this->grade < 150)
+        this->grade++;
 }
 
 //-------------------------------Operator assignement--------------------------------

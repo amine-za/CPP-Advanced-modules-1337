@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:41:33 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/24 22:52:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:24:05 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void    AForm::beSigned(Bureaucrat &obj)
 {
     if (this->GetSignGrade() >= obj.getGrade()) // this mean that the grade of the bureancrat is greater and higher that the grade of the form
         this->signd = true;
+    else
+        throw(AForm::CantSignForm());
 }
 
 //-------------------------Exceptions functions-------------------------//
@@ -88,6 +90,11 @@ const char *AForm::FormNotSigned::what() const throw()
 const char *AForm::GradeDontPermit::what() const throw()
 {
     return ("It seems that the grade of the bureaucrat dont permit to sing the form");
+}
+
+const char *AForm::CantSignForm::what() const throw()
+{
+    return ("That Form cant be signed by that Bureaucrat");
 }
 
 //---------------------operators assignement---------------------//

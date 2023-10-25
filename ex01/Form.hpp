@@ -42,6 +42,12 @@ class Form
                 virtual const char *what() const throw();
         };
 
+        class CantSignForm: public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+
         Form &operator=(Form &obj);
 
 };

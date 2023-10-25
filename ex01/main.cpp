@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:43:53 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 11:04:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:48:44 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@
 
 int main()
 {
+    bool SignedOrNot = false;
     Form F1("F1", 43, 22);
     Bureaucrat B1(48, "B1");
 
-    F1.beSigned(B1);
     std::cout << BLUE_TEXT << "Test 01 : " << RESET_TEXT;
+    try
+    {
+        F1.beSigned(B1);
+    }
+    catch(Form::CantSignForm &e)
+    {
+        std::cerr << e.what() << std::endl;
+        SignedOrNot = true;
+    }
+    if (!SignedOrNot)
+        std::cout << "That Form has been signed successfully by the Bureaucrat\n";
+    SignedOrNot = false;
+
     std::cout << "the form grade is higher than the bureau grade, so the boolean should be true and the form should be signed" << std::endl;
     std::cout << BLUE_TEXT << "Result 01 : " << RESET_TEXT;
     std::cout << "Form signed boolean = " << F1.GetSignBoolean() << "   |   ";
@@ -31,8 +44,21 @@ int main()
 
     Form F2("F2", 49, 22);
     Bureaucrat B2(48, "B2");
-    F2.beSigned(B2);
+
     std::cout << BLUE_TEXT << "\nTest 02 : " << RESET_TEXT;
+    try
+    {
+        F2.beSigned(B2);
+    }
+    catch(Form::CantSignForm &e)
+    {
+        std::cerr << e.what() << std::endl;
+        SignedOrNot = true;
+    }
+    if (!SignedOrNot)
+        std::cout << "That Form has been signed successfully by the Bureaucrat\n";
+    SignedOrNot = false;
+
     std::cout << "the form grade is lower than the bureau grade, so the boolean should be false and the form should not be signed" << std::endl;
     std::cout << BLUE_TEXT << "Result 02 : " << RESET_TEXT;
     std::cout << "Form signed boolean = " << F2.GetSignBoolean() << "   |   ";

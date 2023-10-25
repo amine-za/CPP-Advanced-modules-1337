@@ -8,6 +8,8 @@
 
 #define RESET_TEXT "\033[0m"
 #define BLUE_TEXT "\033[34m"
+#define ORANGE_TEXT "\033[38;5;208m"
+
 
 class Bureaucrat; 
 
@@ -62,6 +64,12 @@ class AForm
         class   GradeDontPermit : public std::exception
         {
             public :
+                virtual const char *what() const throw();
+        };
+
+        class CantSignForm: public std::exception
+        {
+            public:
                 virtual const char *what() const throw();
         };
 
