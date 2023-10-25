@@ -3,9 +3,6 @@
 **Table of Contents**
 - [Project Description](#project-description)
 - [Compilation](#compilation)
-- [Usage](#usage)
-- [Files](#files)
-- [Author](#author)
 
 ## Project Description
 This repository is part of the CPP_module_05 project at 42 School, which focuses on mastering C++ and its related concepts. The project's goal is to provide you with practical experience in C++ by implementing various aspects of the language.
