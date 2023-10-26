@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 13:00:24 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:29:38 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@ Bureaucrat::Bureaucrat(int G) : name("default")
 {
     this->grade = G;
     if (grade > 150)
-        throw(Bureaucrat::GradeTooHighException());
-    if (grade < 1)
         throw(Bureaucrat::GradeTooLowException());
+    if (grade < 1)
+        throw(Bureaucrat::GradeTooHighException());
 }
 
 Bureaucrat::Bureaucrat(int G, std::string N) : name(N)
 {
     this->grade = G;
     if (this->grade > 150)
-        throw(Bureaucrat::GradeTooHighException());
-    if (this->grade < 1)
         throw(Bureaucrat::GradeTooLowException());
+    if (this->grade < 1)
+        throw(Bureaucrat::GradeTooHighException());
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat &obj)
 {
     *this = obj;
     if (grade > 150)
-        throw(Bureaucrat::GradeTooHighException());
-    else if (grade < 1)
         throw(Bureaucrat::GradeTooLowException());
+    else if (grade < 1)
+        throw(Bureaucrat::GradeTooHighException());
 }
 
 //------------------------------------Destructor-------------------------------------
@@ -80,20 +80,18 @@ int Bureaucrat::getGrade() const
 
 void    Bureaucrat::IncrementGrade()
 {
-    // this->grade++;
-    // if (grade > 150)
-    //     throw(Bureaucrat::GradeTooHighException());
     if (this->grade > 1)
         this->grade--;
+    else
+        throw(Bureaucrat::GradeTooHighException());
 }
 
 void    Bureaucrat::DecrementGrade()
 {
-    // this->grade--;
-    // if (grade < 1)
-    //     throw(Bureaucrat::GradeTooLowException());
     if (this->grade < 150)
         this->grade++;
+    else
+        throw(Bureaucrat::GradeTooLowException());
 }
 
 //----------------------------------signForm function---------------------------------

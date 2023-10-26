@@ -1,10 +1,12 @@
-Name = ex01
+Name = ex03
 
 CC = c++
 
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = main.cpp AForm.cpp Bureaucrat.cpp \
+PresidentialPardonForm.cpp RobotomyRequestForm.cpp \
+ShrubberyCreationForm.cpp Intern.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:44:12 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 13:22:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:09:29 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ Form::Form(std::string N, int Gs, int Ge) : name(N), GradeToSign(Gs), GradeToExe
 {
     this->signd = false;
     if (this->GradeToExecute > 150 || this->GradeToSign > 150)
-        throw(GradeTooHighException());
-    if (this->GradeToExecute < 1 || this->GradeToSign < 1)
         throw(GradeTooLowException());
+    if (this->GradeToExecute < 1 || this->GradeToSign < 1)
+        throw(GradeTooHighException());
 }
 
 Form::Form(Form &obj) : name(obj.name), GradeToSign(obj.GradeToSign), GradeToExecute(obj.GradeToExecute)

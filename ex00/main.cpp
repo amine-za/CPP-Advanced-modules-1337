@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:41:32 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/25 12:55:15 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:11:36 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main()
     Bureaucrat B(48, "numnum");
 
     //---------------Grade higher test---------------
-    std::cout << "\n                  TEST 01\n";
+    std::cout << "\n                  TEST 01 : Grade higher\n";
     try
     {
         Bureaucrat B1(4869, "test");
@@ -32,7 +32,7 @@ int main()
     }
 
     //---------------Grade lower test---------------
-    std::cout << "\n                  TEST 02\n";
+    std::cout << "\n                  TEST 02 : Grade lower\n";
     try
     {
         Bureaucrat B2(0, "test");
@@ -47,7 +47,7 @@ int main()
     }
     
     //---------------Grade in range test---------------
-    std::cout << "\n                  TEST 03\n";
+    std::cout << "\n                  TEST 03 : Grade in range\n";
     try
     {
         Bureaucrat B2(14, "test");
@@ -62,20 +62,43 @@ int main()
     }
     
     //---------------IncrementGrade function test---------------
-    std::cout << "\n                  TEST 04\n";
+    std::cout << "\n                  TEST 04 : IncrementGrade function\n";
     std::cout << "Grade before increment : " << B.getGrade() << std::endl;
-    B.IncrementGrade();
+    try
+    {
+        B.IncrementGrade();
+    }
+    catch (Bureaucrat::GradeTooHighException &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    catch (Bureaucrat::GradeTooLowException &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    
     std::cout << "Grade after increment  : " << B.getGrade() << std::endl;
 
     //---------------DecrementGrade function test---------------
-    std::cout << "\n                  TEST 05\n";
+    std::cout << "\n                  TEST 05 : DecrementGrade function\n";
     std::cout << "Grade before decrement : " << B.getGrade() << std::endl;
-    B.DecrementGrade();
+    try
+    {
+        B.DecrementGrade();
+    }
+    catch (Bureaucrat::GradeTooHighException &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    catch (Bureaucrat::GradeTooLowException &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
     std::cout << "Grade after decrement  : " << B.getGrade() << std::endl;
 
 
     //---------------operator << test---------------
-    std::cout << "\n                  TEST 06\n";
+    std::cout << "\n                  TEST 06 : \"<<\" operator\n";
     std::cout << B << std::endl;
     return 0;
 }

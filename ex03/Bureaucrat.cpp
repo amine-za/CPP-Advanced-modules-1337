@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 12:43:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/26 11:32:25 by azaghlou         ###   ########.fr       */
+/*   Created: 2023/10/25 18:29:54 by azaghlou          #+#    #+#             */
+/*   Updated: 2023/10/25 18:29:56 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 Bureaucrat::Bureaucrat() : name("default")
 {
     this->grade = 1;
-    // By default i set the grade to the highest one so its set to "1"
+    // By default i set the grade the the most higher one 
 }
 
 Bureaucrat::Bureaucrat(int G) : name("default")
@@ -94,9 +94,26 @@ void    Bureaucrat::DecrementGrade()
         throw(Bureaucrat::GradeTooLowException());
 }
 
-//---------------------------------------------------------------//
+//----------------------------------signForm function---------------------------------
 
-void    Bureaucrat::signForm(Form &obj)
+void    Bureaucrat::executeForm(AForm const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.GetName() << std::endl;
+    }
+    catch(AForm::FormNotSigned &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    catch(AForm::GradeDontPermit &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void    Bureaucrat::signForm(AForm &obj)
 {
     if (obj.GetSignBoolean())
         std::cout << this->getName() <<  " signed "  << obj.GetName() << std::endl;
