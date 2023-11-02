@@ -1,5 +1,7 @@
-A();
-A(A &obj);
-~A();
+#include "A.hpp"
 
-A   &operator=(A &obj);
+A::A()
+{}
+
+A::~A()
+{}

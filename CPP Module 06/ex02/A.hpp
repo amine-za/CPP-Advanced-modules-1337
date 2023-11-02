@@ -7,10 +7,7 @@ class A : public Base
 {
     public :
         A();
-        A(A &obj);
         ~A();
-
-        A   &operator=(A &obj);
 };
 
 #endif

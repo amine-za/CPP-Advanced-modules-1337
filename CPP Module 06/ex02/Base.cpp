@@ -6,14 +6,11 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:26:22 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/31 15:28:07 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:02:39 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Base.hpp"
-
-Base::Base()
-{}
 
 Base::~Base()
 {}

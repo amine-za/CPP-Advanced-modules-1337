@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/31 00:54:48 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/10/31 21:08:02 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ Static::~Static()
 
 std::string VisibleChar(char c)
 {
+    int ascii = c;
     std::string  C_to_str;
+    
     C_to_str += '\'';
     C_to_str += c;
     C_to_str += '\'';
-    if (c >= 32 && c < 127)
+    if (ascii >= 32 && ascii < 127)
         return C_to_str;
     return ("Non displayable");
 }
@@ -137,7 +139,7 @@ int    Static::convert(std::string str)
         if (pos == 0)
             return (std::cout << "error\n", 0);
         if (!str[pos+1] || str[pos+1] == 'f')
-            return (std::cout << "error", 0);
+            return (std::cout << "error\n", 0);
         for(int x = 0; str[x]; x++)
         {
             if (x == 0 && (str[x] == '-' || str[x] == '+'))
