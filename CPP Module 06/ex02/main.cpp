@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:25:10 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/02 10:15:34 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:03:30 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ Base *generate(void)
 
 void identify(Base* p)
 {
+    // std::cout << "pointer identify has been called\n";
     A *a;
     B *b;
     C *c;
@@ -61,6 +62,7 @@ void identify(Base* p)
 
 void identify(Base& p)
 {
+    // std::cout << "reference identify has been called\n";
     bool EnteredOrNot = false;
     try
     {
@@ -110,7 +112,6 @@ void identify(Base& p)
 
 int main()
 {
-    
     Base    *pointer = NULL;
     pointer = generate();
     Base    &reference = *pointer;

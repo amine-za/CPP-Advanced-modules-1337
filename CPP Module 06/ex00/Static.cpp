@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/10/31 21:08:02 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:51:45 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,14 @@ void    double_case(double var)
     std::cout << "double: " << Double << PrintDoubleComma(Double) << std::endl;
 }
 
+void    error()
+{
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "int: impossible" << std::endl;
+    std::cout << "float: nanf" << std::endl;
+    std::cout << "double: nan" << std::endl;
+}
+
 int    Static::convert(std::string str)
 {
     int pos = -1;
@@ -132,20 +140,20 @@ int    Static::convert(std::string str)
     {
         std::string s = &str[pos + 1];
         if (s.find(".") != std::string::npos)
-            return (std::cout << "error\n", 0);
+            return (error(), 0);
     }
     if (pos != -1) // this mean that we found a '.' char       Float check
     {
         if (pos == 0)
-            return (std::cout << "error\n", 0);
+            return (error(), 0);
         if (!str[pos+1] || str[pos+1] == 'f')
-            return (std::cout << "error\n", 0);
+            return (error(), 0);
         for(int x = 0; str[x]; x++)
         {
             if (x == 0 && (str[x] == '-' || str[x] == '+'))
                 continue;
             if (!std::isdigit(str[x]) && str[x] != '.' && !(str[x] == 'f' && !str[x+1]))
-                return (std::cout << "error\n", 0);
+                return (error(), 0);
         }
         std::stringstream ss(RemoveF(str));
         float F = 0;
@@ -170,14 +178,14 @@ int    Static::convert(std::string str)
         if (x == 0 && (str[x] == '+' || str[x] == '-'))
             continue;
         if (!std::isdigit(str[x]))
-            return (std::cout << "error\n", 0);
+            return (error(), 0);
         if (!str[x+1]) // i have to check that the number dont exceed the max or the min int 
         {
             std::stringstream ss(str);
             long int nbr = 0;
             ss >> nbr;
             if (str.length() > 10 || nbr > INT_MAX || nbr < INT_MIN) // TO DO : i have to count the length of the number manually
-                return (std::cout << "error\n", 0);
+                return (error(), 0);
             return (int_case(nbr), 0);
         } 
     }
