@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/02 15:51:45 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/02 22:05:32 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int    Static::convert(std::string str)
     if (str.length() <= 1 && !std::isdigit(str[0]))
     {
         if (str[0] < 32 && str[0] != '\t')
-            return (std::cout << "the char is non printable\n", 0);
+            return (error(), 0);
         return (char_case(str[0]), 0);
     }
     pos = str.find(".");
