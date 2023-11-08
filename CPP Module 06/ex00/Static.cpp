@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/02 22:05:32 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:38:26 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ std::string VisibleChar(char c)
 
 std::string    PrintDoubleComma(double d)
 {
-    float Round = std::floor(d);
+    float Round = static_cast<float>(std::floor(d));
 
     if (d == Round)
         return (".0");
@@ -49,11 +49,15 @@ std::string    PrintDoubleComma(double d)
 
 std::string    PrintFloatComma(float f)
 {
-    float Round = std::floor(f);
- 
-    if (f == Round)
-        return (".0");
-    return("");
+    float Round = static_cast <float> (std::floor(f));
+
+// NOTE : (f != 1.0 / 0.0)  AND  (f != -1.0 / 0.0) refers that the var f is not equal to inf or -inf
+// NOTE : And (f < 999999.5) refers to if the float is with the "e" methode
+    if (f == 1.0 / 0.0 || f == -1.0 / 0.0 || f >= 999999.5)
+        return ("");
+    if ((f == Round) && (f != 1.0 / 0.0) && (f != -1.0 / 0.0) && (f < 999999.5))
+        return (".0f");
+    return("f");
 }
 
 std::string RemoveF(std::string str) // This function remove the f char if it exist in the end of that string
@@ -68,53 +72,59 @@ std::string RemoveF(std::string str) // This function remove the f char if it ex
 
 void    char_case(char var)
 {
-    char    Char = var;
-    int     Int = var;
-    float   Float = var;
-    double  Double = var;
+    char    Char = static_cast<char>(var);
+    int     Int = static_cast<int>(var);
+    float   Float = static_cast<float>(var);
+    double  Double = static_cast<double>(var);
 
     std::cout << "char: " << VisibleChar(Char) << std::endl;
     std::cout << "int: " << Int << std::endl;
-    std::cout << "float: " << Float << PrintFloatComma(Float) << "f" << std::endl;
+    std::cout << "float: " << Float << PrintFloatComma(Float) << std::endl;
     std::cout << "double: " << Double << PrintDoubleComma(Double) << std::endl;
 }
 
 void    int_case(int var)
 {
-    char    Char = var;
-    int     Int = var;
-    float   Float = var;
-    double  Double = var;
+    char    Char = static_cast<char>(var);
+    int     Int = static_cast<int>(var);
+    float   Float = static_cast<float>(var);
+    double  Double = static_cast<double>(var);
 
     std::cout << "char: " << VisibleChar(Char) << std::endl;
     std::cout << "int: " << Int << std::endl;
-    std::cout << "float: " << Float  << PrintFloatComma(Float) << "f" << std::endl;
+    std::cout << "float: " << Float  << PrintFloatComma(Float) << std::endl;
     std::cout << "double: " << Double << PrintDoubleComma(Double) << std::endl;
 }
 
 void    float_case(float var)
 {
-    char    Char = std::floor(var);
-    int     Int = var;
-    float   Float = var;
-    double  Double = var;
+    char    Char = static_cast<char>(std::floor(var));
+    int     Int = static_cast<int>(var);
+    float   Float = static_cast<float>(var);
+    double  Double = static_cast<double>(var);
 
     std::cout << "char: " << VisibleChar(Char) << std::endl;
     std::cout << "int: " << Int << std::endl;
-    std::cout << "float: " << Float << PrintFloatComma(Float) << "f" << std::endl;
+    std::cout << "float: " << Float << PrintFloatComma(Float) << std::endl;
     std::cout << "double: " << Double << PrintDoubleComma(Double) << std::endl;
 }
 
 void    double_case(double var)
 {
-    char    Char = std::floor(var);
-    int     Int = var;
-    float   Float = var;
-    double  Double = var;
+    char    Char = static_cast<char>(std::floor(var));
+    int     Int = static_cast<int>(var);
+    float   Float = static_cast<float>(var);
+    double  Double = static_cast<double>(var);
+    
+    // std::cout << "double casr float = " << Float << std::endl;
+    // PrintFloatComma(Float);
+    // exit(0);
 
+    // printf("var = %f\n", var);
+    // printf("float = %f\n", Float);
     std::cout << "char: " << VisibleChar(Char) << std::endl;
     std::cout << "int: " << Int << std::endl;
-    std::cout << "float: " << Float  << PrintFloatComma(Float) << "f" << std::endl;
+    std::cout << "float: " << Float << PrintFloatComma(Float) << std::endl;
     std::cout << "double: " << Double << PrintDoubleComma(Double) << std::endl;
 }
 

@@ -3,12 +3,19 @@
 
 #include <iostream>
 
-template <typename T>
-
-void    iter(T *address, int length, void (*fct)(T &ref))
+template <typename T, typename func>
+void iter(T address, int length, func ft)
 {
     for(int x = 0; x < length; x++)
-        fct(address[x]);
+        ft(address[x]);
 }
+
+// Example of an instantiated function template
+template <typename X>
+void print_template(X i)
+{
+    std::cout << "The template is: " << i << std::endl;
+}
+
 
 #endif

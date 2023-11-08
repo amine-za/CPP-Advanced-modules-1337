@@ -5,24 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 00:18:48 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/04 18:37:17 by azaghlou         ###   ########.fr       */
+/*   Created: 2023/11/06 08:28:43 by azaghlou          #+#    #+#             */
+/*   Updated: 2023/11/08 11:25:03 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
-#include "Serializer.hpp"
+#include "Array.hpp"
 
 int main()
 {
-    Data D;
-    Data *after_cast;
-    uintptr_t buffer = 0;
-    D.value = 4869;
-
-    std::cout << "before serialize: " << D.value << std::endl;
-    buffer = Serializer::serialize(&D);
-    std::cout << "after serialize: " << buffer << std::endl;
-    after_cast = Serializer::deserialize(buffer);
-    std::cout << "after deserialize: " << after_cast->value << std::endl;
+    test T1;
+    test T2;
+    T2.setter(3);
+    std::cout << T1.getter() << std::endl;
 }

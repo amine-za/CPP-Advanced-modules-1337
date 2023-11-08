@@ -8,11 +8,13 @@
 
 class Static
 {
-    public :
+    private :
         Static();
         Static(Static &obj);
+
+    public :
         ~Static();
-        int    convert(std::string str);
+        static int    convert(std::string str);
 
         Static &operator=(Static &obj);
 };
