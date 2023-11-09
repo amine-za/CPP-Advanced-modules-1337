@@ -2,52 +2,54 @@
 #define ARRAY_HPP
 
 #include <iostream>
+#include <iostream>
+#include <stdexcept>
 
-
-class test
+template <typename T>
+class Array
 {
-    public :
-        int var;
-        test()
+    private:
+        int array_size;
+        T *array;
+
+    public:
+        Array()                         // Orthodox : Default Constructor
         {
-            var = 0;
+            array_size = 0;
+            this->array = new T(0);
         }
-        test(int input)
+
+        Array(unsigned int n)
         {
-            var = input;
+            array_size = n;
+            this->array = new T(n);
         }
-        int getter()
+
+        Array(Array &obj)               // Orthodox : copy constructor
         {
-            return  (var);
+            *this = obj;
         }
-        void    setter(int input)
+
+        ~Array()                        // Orthodox : Destructor
+        {}
+
+        int size() const
         {
-            var = input;
+            return (this->array_size);
+        }
+
+        Array operator=(Array &obj)     // Orthodox : copy assignement opperator
+        {
+            this->array = &obj.array;
+        }
+
+        Array operator[](size_t index)
+        {
+            if (index >= this->size)
+                throw(std::out_of_range("The index is out of bounds"));
+            else
+                return (this->array[index]);
         }
 };
-
-// template <typename T>
-// class Array
-// {
-//     private:
-
-//     public:
-//         int size;
-//         T array[size];
-
-//         Array();                        // Orthodox
-//         Array(Array A);                 // Orthodox
-//         ~Array();                       // Orthodox
-
-//         Array(unsigned int n)
-//         {
-//             size = n;
-//         }
-
-//         Array operator=(Array &obj)     // Orthodox
-//         {
-//             this->size = obj.size;
-//         }
-// };
 
 #endif

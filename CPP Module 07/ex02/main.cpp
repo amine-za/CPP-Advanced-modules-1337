@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 08:28:43 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/08 11:25:03 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/09 09:58:29 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int main()
 {
-    test T1;
-    test T2;
-    T2.setter(3);
-    std::cout << T1.getter() << std::endl;
+    int *a = new int();
+    std::cout << *a << std::endl;
 }
+
