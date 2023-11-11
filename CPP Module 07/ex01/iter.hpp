@@ -1,6 +1,10 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
+#define RESET_TEXT "\033[0m"
+#define BLUE_TEXT "\033[34m"
+#define ORANGE_TEXT "\033[38;5;208m"
+
 #include <iostream>
 
 template <typename T, typename func>

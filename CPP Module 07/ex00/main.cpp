@@ -6,15 +6,15 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:32:47 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/04 22:30:30 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:57:36 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "header.hpp"
 
 int main()
 {
+    std::cout << BLUE_TEXT << "The output of the subject main : " << RESET_TEXT << std::endl;
     int a = 2;
     int b = 3;
     swap(a, b);
