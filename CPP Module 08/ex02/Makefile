@@ -1,10 +1,10 @@
-Name = Span
+Name = Mutated_abomination
 
 CC = c++
 
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g
 
-SRC = main.cpp Span.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
