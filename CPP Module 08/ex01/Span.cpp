@@ -6,19 +6,20 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 19:42:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/14 22:19:56 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:24:00 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
 Span::Span()
-{}
+{
+    this->N = 0;
+}
 
 Span::Span(unsigned int n)
 {
     this->N = n;
-    // this->vec = new std::vector<int>(arr, arr + N);
 }
 
 Span::~Span()
@@ -34,7 +35,7 @@ void    Span::addNumber(int num)
 
 int    Span::shortestSpan()
 {
-    if (this->vec.size() > 1) // That means that there is more than one argument
+    if (this->vec.size() > 1) // That means that there is more than one argument in the vector
     {
         int dist = std::numeric_limits<int>::max();
         for(int x = 0; x < static_cast<int>(this->vec.size()) - 1; x++)
@@ -50,7 +51,7 @@ int    Span::shortestSpan()
 
 int    Span::longestSpan()
 {
-    if (this->vec.size() > 1) // That means that there is more than one argument
+    if (this->vec.size() > 1) // That means that there is more than one argument in the vector
     {
         int dist = 0;
         for(int x = 0; x < static_cast<int>(this->vec.size()) - 1; x++)
@@ -73,16 +74,18 @@ void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator
     {
         throw std::overflow_error("Not enough space to add the entire range.");
     }
-
-    // vec.reserve(this->N);  // To ensure enough space is allocated
-
     std::copy(begin, end, std::back_inserter(vec));
 }
 
 void    Span::print_container()
 {
-    for(int x = 0; x < (int)this->vec.size(); x++)
-        std::cout << "vec[" << x << "] = " << this->vec[x] << std::endl;
+    std::cout << "vec = {" << this->vec[0];
+    for(int x = 1; x < (int)this->vec.size(); x++)
+    {
+        std::cout << ", ";
+        std::cout << this->vec[x];
+    }
+    std::cout << "}" << std::endl;
 }
 
 Span    &Span::operator=(Span &obj)
@@ -91,4 +94,3 @@ Span    &Span::operator=(Span &obj)
     this->vec = obj.vec;
     return(*this);
 }
-
