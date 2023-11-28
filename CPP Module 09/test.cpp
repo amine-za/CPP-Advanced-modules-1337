@@ -6,8 +6,15 @@
 
 int main()
 {
-    double d = (double)47115.93 * (double)353.688;
-    std::cout << d << std::endl;
+    bool    leap;
+    leap = false;
+    float d = 47115.99f;
+    // int integer = d;
+    std::cout << "double = " << (float)d << std::endl;
+    // if ((double)integer == d)
+    //     std::cout << "there is no periode" << std::endl;
+    // else
+    //     std::cout << "there is a periode" << std::endl;
 }
 
 // // Function to convert date to timestamp
