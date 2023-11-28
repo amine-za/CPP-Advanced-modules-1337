@@ -4,23 +4,23 @@ This repository contains the C++ modules completed as part of the CPP Advanced c
 
 ## Modules
 
-- **Module 05**: github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 05
+- **Module 05**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 05
   - Description: Brief description of the module content.
   - Topics Covered: List key topics covered in the module.
 
-- **Module 06**: github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 06
+- **Module 06**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 06
   - Description: Brief description of the module content.
   - Topics Covered: List key topics covered in the module.
 
-- **Module 07**: github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 07
+- **Module 07**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 07
   - Description: Brief description of the module content.
   - Topics Covered: List key topics covered in the module.
 
-- **Module 08**: github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 08
+- **Module 08**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 08
   - Description: Brief description of the module content.
   - Topics Covered: List key topics covered in the module.
 
-- **Module 09**: github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 09
+- **Module 09**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP Module 09
   - Description: Brief description of the module content.
   - Topics Covered: List key topics covered in the module.
 
