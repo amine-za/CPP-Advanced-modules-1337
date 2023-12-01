@@ -1,10 +1,10 @@
-Name = btc
+Name = RPN
 
 CC = c++
 
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = main.cpp BitcoinExchange.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

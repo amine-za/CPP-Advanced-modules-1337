@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:39:06 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/28 11:59:43 by azaghlou         ###   ########.fr       */
+/*   Updated: 2023/12/01 10:00:23 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // #include <iostream>
 
 // int main() {
-//     // Representing a null-like value for a double
-//     double myValue = std::numeric_limits<double>::quiet_NaN();
+//     // Representing a null-like value for a float
+//     float myValue = std::numeric_limits<float>::quiet_NaN();
 
 //     // Check if the value is NaN
 //     if (std::isnan(myValue))
@@ -34,15 +34,24 @@
             //         && file_content[x][y] != ' ' && file_content[x][y] != '|' && file_content[x][y] != '\n')
             //     return (1);
 
-
-
 int main(int ac, char **av)
 {
     if (ac == 2)
     {
-        std::map<std::string, double> Map = completeTask(av[1]);
-        // while(1);
-        system("leaks btc");
+        std::string input = av[1];
+        std::map<std::string, float> Map;
+        fill_the_container(&Map);
+        // for(std::map<std::string, float>::iterator it = Map.begin(); it->first != "2017-03-18" && it != Map.end(); it++)
+        // {
+        //     if (it->second != 0)
+        //     {
+        //         std::cout << "first : " << it->first << " second : " << it->second << std::endl;
+        //         break;
+        //     }
+        // }
+        
+        // // std::cout << "0 : " << Map["2010-08-17"] << "   |    1 : " << Map["2012-07-10"] << std::endl;
+        DoTheRealWork(Map, input);
     }
     else
         std::cerr << "Error: could not open file.\n";

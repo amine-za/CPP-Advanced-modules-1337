@@ -1,20 +1,16 @@
 #include <iostream>
 #include <iomanip>
 #include <chrono>
+#include <stack>
 #include <sstream>
 #include <ctime>
 
 int main()
 {
-    bool    leap;
-    leap = false;
-    float d = 47115.99f;
-    // int integer = d;
-    std::cout << "double = " << (float)d << std::endl;
-    // if ((double)integer == d)
-    //     std::cout << "there is no periode" << std::endl;
-    // else
-    //     std::cout << "there is a periode" << std::endl;
+    std::stack<int> S;
+    S.push(1);
+    S.push(2030);
+    std::cout << S.size() << std::endl;
 }
 
 // // Function to convert date to timestamp
