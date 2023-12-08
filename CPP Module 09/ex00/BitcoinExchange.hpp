@@ -8,7 +8,6 @@
 #include <sstream>
 #include <limits>
 #include <ctime>
-#include <unistd.h>
 
 
 std::string    *add_arg_to_array(std::string *array, std::string arg);
