@@ -21,6 +21,7 @@ fclean : clean
 
 re : fclean all
 
-my : re
+# my RULE: A rule that call the 're' and 'clean' rules and clears the screen output
+my : re 
 	@rm -rf $(OBJ)
 	clear

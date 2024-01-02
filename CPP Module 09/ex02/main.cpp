@@ -14,11 +14,14 @@
 #include <sstream>
 #include <vector>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define RESET_TEXT "\033[0m"
 #define BLUE_TEXT "\033[34m"
 #define ORANGE_TEXT "\033[38;5;208m"
+#define RED_TEXT "\033[31m"
 
+int i = 0;
 int ArgsNum;
 int EvenArgsNum;
 
@@ -99,7 +102,7 @@ void    SwapTwoArgs(std::vector<int>::iterator it1, std::vector<int>::iterator i
     *it2 = buffer;
 }
 
-void    swap_elements(std::vector<int> *vec, std::vector<int>::iterator arg1,  std::vector<int>::iterator arg2)
+void    swap_elements(std::vector<int> &vec, std::vector<int>::iterator arg1,  std::vector<int>::iterator arg2)
 {
     // std::cout << "i want to swap " << *arg1 << " and " << *arg2 << "\n";
     int distance = arg2 - arg1;
@@ -107,7 +110,7 @@ void    swap_elements(std::vector<int> *vec, std::vector<int>::iterator arg1,  s
     distance -= 1;
     std::vector<int>::iterator it1;
     std::vector<int>::iterator it2;
-    if (arg1-distance >= vec->begin() && arg2-distance >= vec->begin())
+    if (arg1-distance >= vec.begin() && arg2-distance >= vec.begin())
     {
         it1 = arg1 - distance;
         it2 = arg2 - distance;
@@ -127,7 +130,7 @@ void    swap_elements(std::vector<int> *vec, std::vector<int>::iterator arg1,  s
     }
 }
 
-void    erase_element(std::vector<int> *vec, std::vector<int>::iterator it, int increment)
+void    erase_element(std::vector<int> &vec, std::vector<int>::iterator it, int increment)
 {
     // maybe i modify in that iterator in the parameter and it should not be modified
     // print_vector(vec);
@@ -144,12 +147,12 @@ void    erase_element(std::vector<int> *vec, std::vector<int>::iterator it, int 
     increment--;
     it = it - increment;
     for(int x = increment; x >= 0; x--)
-        it = vec->erase(it);
+        it = vec.erase(it);
 }
                
 std::vector<int>    push_element(std::vector<int> &V, std::vector<int>::iterator it, int increment)
 {
-    // std::cout << "push element entered, increment = " << increment << std::endl;
+    // std::cout << BLUE_TEXT << "push element entered, increment = " << RESET_TEXT<< increment << std::endl;
     // std::cout << "the vec ::        ";
     // for(std::vector<int>::iterator it = V.begin(); it != V.end(); it++)
     //     std::cout << *it << " | ";
@@ -165,11 +168,8 @@ std::vector<int>    push_element(std::vector<int> &V, std::vector<int>::iterator
         // std::cout << *(it-increment) << " ";
         increment--;
     }
-    // std::cout << "\n\n";
-    // for( std::vector<int>::iterator it = V.begin(); it != V.end(); it++)
-    //     std::cout << *it << " | ";
-    // std::cout << std::endl;
-    // std::cout << "push element exited\n";
+    // print_vector(v);
+    // std::cout << BLUE_TEXT << "push element exited\n"<< RESET_TEXT;
     return (V);
 }
 
@@ -179,22 +179,33 @@ std::vector<int>    InsertElementInMainChain(std::vector<int> MainChain, std::ve
     
     std::vector<int>::iterator MainChain_it = MainChain.begin();
     if (MainChain.size() > 0)
+    {
         MainChain_it += increment - 1;
-
+        // std::cout << "entered 1\n";
+    }
+    else
+        std::cout << RED_TEXT << "There is a problem if that message appears\n" << RESET_TEXT;
+    std::cout << "The pend is : " << *Pend_it << std::endl;
     while (1)
     {
         if (MainChain_it < MainChain.end() && *MainChain_it == bound)
         {
-            MainChain_it = MainChain.begin();
-            if (MainChain_it >= MainChain.begin()+increment+1)
-                MainChain_it -= increment+1;
+            if (MainChain_it == MainChain.end() - 1 && *Pend_it >= *MainChain_it)
+            {
+                MainChain_it = MainChain.end();
+                // std::cout <<  "<- entered 2\n";
+            }
+            else
+            {
+                MainChain_it -= increment - 1;
+                // std::cout << "entered 3\n";
+            }
             int dist = MainChain_it - MainChain.begin();
             increment--;
-            while (increment != -1 && MainChain_it < MainChain.end())
+            for (int x = 0; MainChain_it <= MainChain.end() && x <= increment; x++)
             {
+                MainChain.insert(MainChain_it, *(Pend_it - x));
                 MainChain_it = MainChain.begin() + dist;
-                MainChain.insert(MainChain_it, *(Pend_it - increment));
-                increment--;
             }
             break;
         }
@@ -211,109 +222,110 @@ void    binary_search(std::vector<int> *MainChain, std::vector<int> *Pend, int i
 
     std::cout << "              binary search entered and the increment equal " << increment << "\n";
     
-    print_vector(MainChain, increment, "MainChain in the begining of binary search");
+    // print_vector(MainChain, increment, "MainChain in the begining of binary search");
     
-    std::cout << "\n\n--------\n\nThe increment is: " << increment << std::endl;
-    print_vector(MainChain, increment, "MainChain");
     for (; MainChain_it < MainChain->end(); MainChain_it += increment)
         vec.push_back(*MainChain_it);
     for(std::vector<int>::iterator it = vec.begin(); it < vec.end(); it++)
         std::cout << *(it) << " - ";
+    std::cout << std::endl;
     
-    std::vector<int>::iterator pend_it = Pend->begin();
-    while(pend_it != Pend->end())
+    Pend_it = Pend->begin() + increment - 1;
+    // std::cout << RED_TEXT << "------------------------------------------------------------------------" << std::endl;
+    for (int x = (increment*2) - 1; Pend_it < Pend->end(); x += increment)
     {
-        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end(), *pend_it);
-        std::cout << "lower: " << *LowrBndIt << std::endl;
-        print_vector(MainChain, increment, "MainChain"); // printing the main chain
+        // std::cout << "The pend_it is: " << *pend_it << std::endl;
+        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, *Pend_it);
+        std::cout << "\n\n                  The lower bound is: " << *LowrBndIt << " and the *pend_it is: " << *Pend_it << std::endl;
         std::cout << std::endl << "increment = " << increment << std::endl;
         *MainChain = InsertElementInMainChain(*MainChain, Pend_it, *LowrBndIt, increment);
-        pend_it += increment;
-        break;
+        Pend_it = Pend->begin() + x;
     }
 }
 
-void    recurcive(std::vector<int> *vec, int increment)
+void    recurcive(std::vector<int> &vec, int &increment)
 {
-    // std::cout << "Recurcive begins with " << increment << " increment value\n";
+    std::cout << BLUE_TEXT << "----Recurcive begins with " << increment << " in its increment--------------------------------------------\n" << RESET_TEXT;
     std::vector<int> rest;
-    std::vector<int>::iterator arg1 = vec->begin() + increment - 1;
-    std::vector<int>::iterator arg2 = vec->begin() + (increment*2) - 1;
+    std::vector<int>::iterator arg1 = vec.begin() + increment - 1;
+    std::vector<int>::iterator arg2 = vec.begin() + (increment*2) - 1;
     while(1)
     {
-        if (arg1 + 1 == vec->end())
+        if (arg1 + 1 == vec.end())
         {
             rest = push_element(rest, arg1, increment);
-            // print_vector(&rest, increment, "Rest");
             erase_element(vec, arg1, increment);
             break;
         }
-        if (arg2 + 1 >= vec->end())
-            break;
-        std::cout << "arg1 = " << *arg1 << " and arg2 = " << *arg2 << "\n";
-        if (arg2 < vec->end() && *arg1 > *arg2)
+        if (arg2 < vec.end() && *arg1 > *arg2)
         {
             // May cause a SEG
-            std::cout << *arg1 << " and " << *arg2 << " should be swaped swapped\n";
-            // print_vector(vec, increment, "Vector before");
             swap_elements(vec, arg1, arg2);
-            // print_vector(vec, increment, "Vector after");
         }
+        if (arg2 + 1 >= vec.end())
+            break;
         arg1 += increment * 2;
         arg2 += increment * 2;
-        std::cout << "-----------------------------------------------------------\n";
         // Note: we sort just the pairs, in the first case every number with his next number
     }
+    print_vector(&vec, increment, "-vector-");
+    print_vector(&rest, increment, "-rest-");
     if (increment*2 <= ArgsNum/2)
-        recurcive(vec, increment * 2);
-    // exit(4869);
+    {
+        increment *= 2;
+        recurcive(vec, increment);
+    }
     
     // ------------------------------------REVERSE RECURCIVE------------------------------------
-    std::cout << "Reverse Recurcive begins\n";
+    std::cout << BLUE_TEXT << "Reverse Recurcive begins with " << increment << " in its increment--------------------------------------------\n" << RESET_TEXT;
     std::vector<int> MainChain;
     std::vector<int> pend;
-    std::vector<int>::iterator it = vec->begin() + increment - 1;//vec[increment-1];
+    std::vector<int>::iterator it = vec.begin() + increment - 1;// This means it = vec[increment-1];
 
-    if (increment*2 > ArgsNum/2)
+    if (increment < ArgsNum/2)
     {
-        std::cout << ORANGE_TEXT << "ja!\n" << RESET_TEXT;
+        print_vector(&vec, increment, "vector in the begining");
+        // i++;if (i == 2) exit(4869);
+        print_vector(&rest, increment, "Rest");
+
         MainChain = push_element(MainChain, it, increment);
-        print_vector(&MainChain, increment, "MainChain");
         it += increment;
         MainChain = push_element(MainChain, it, increment);
-        print_vector(&MainChain, increment, "MainChain");
-        it += increment;
-        while(increment <= EvenArgsNum / 4) // This while condition work just like an if condition to execute that block.
+        // print_vector(&MainChain, increment, "MainChain");
+        it += increment * 2;
+        while(/*increment <= EvenArgsNum / 4 && */it < vec.end()) // This while condition work just like an if condition to execute that block.
         {
             MainChain = push_element(MainChain, it, increment);
-            if (it + 1 == vec->end())
+            if (it + 1 == vec.end())
                 break;
             it += increment * 2;
         }
-        it = vec->begin() + (increment * 3) - 1; // May cause a seg, it needs an if condition, also the one up there
-        while(increment <= EvenArgsNum / 4) // This while condition work just like an if condition to execute that block.
+        it = vec.begin() + (increment * 3) - 1; // Note: May cause a seg, it needs an if condition, also the one up there
+        while(/*increment <= EvenArgsNum / 4 && */it < vec.end()) // This while condition work just like an if condition to execute that block.
         {
             pend = push_element(pend, it, increment);
-            if (it + increment + 1 == vec->end())
+            if (it + increment + 1 == vec.end())
                 break;
             it += increment * 2;
         }
-        pend = push_element(pend, rest.end() - 1, increment);
-        std::cout << "                      Binary Search\n";
+        if (rest.size() > 0)
+            pend = push_element(pend, rest.end() - 1, increment);
+        print_vector(&MainChain, increment, "MainChain");   // print
+        print_vector(&pend, increment, "Pend");     // print
         binary_search(&MainChain, &pend, increment);
-        print_vector(&MainChain, increment, "MainChain");
-        print_vector(&pend, increment, "Pend");
+        vec = MainChain;
+        print_vector(&vec, increment, "vector in the end");   // print
+        increment /= 2;
     }
-        // for(std::vector<int>::iterator it = pend.begin(); it != pend.end(); it++)
-        //     std::cout << "->" << *it << "\n";
-    // for(std::vector<int>::iterator it = MainChain.begin(); it != MainChain.end(); it++)
-    //     std::cout << *it << " | ";
+    i++;if (i == 5) exit(0);
+    // print_vector(&MainChain, increment, "MainChain result");
 }
 
 int main(int ac, char **av)
 {
-    std::vector<int> vec;
     ArgsNum = 0;
+    int increment = 1;
+    std::vector<int> vec;
 
     if (ac == 1)
         return (std::cerr << "Error: No arguments\n", 1);
@@ -321,7 +333,7 @@ int main(int ac, char **av)
         return (std::cerr << "Error: unvalide arguments\n", 1);
     inputToVector(av, &vec);
     EvenArgsNum = (ArgsNum / 2) * 2;
-    recurcive(&vec, 1);
+    recurcive(vec, increment);
 }
 
 // int main()
@@ -353,3 +365,6 @@ int main(int ac, char **av)
 //         std::cout << *it << " || ";
 //     std::cout << std::endl;
 // }
+
+
+// make my && ./ex02 "59 65 57 114 73 18 86 122 127 26 49 75 125 13 111 53 25 104 120 5 48 51 64 100 66 102 54 98 95 68 17 80 37 14 60 70 11 121 9 115 4 35 47 109 78 105 7 33 15 21"
