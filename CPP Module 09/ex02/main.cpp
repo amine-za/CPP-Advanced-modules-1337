@@ -190,16 +190,6 @@ std::vector<int>    InsertToMainChain(std::vector<int> MainChain, std::vector<in
     return (MainChain);
 }
 
-bool cmp(std::vector<int> a, std::vector<int> b)
-{
-    if (a < *b)
-    {
-        comparaisons++;
-        return (true);
-    }
-    return (false);
-}
-
 void    binary_search(std::vector<int> &MainChain, std::vector<int> &Pend, int increment)
 {
     std::vector<int> vec;
@@ -214,7 +204,7 @@ void    binary_search(std::vector<int> &MainChain, std::vector<int> &Pend, int i
         MainChain_it = MainChain.begin() + increment - 1;
         for (; MainChain_it < MainChain.end(); MainChain_it += increment)
             vec.push_back(*MainChain_it);
-        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, pend_it, cmp);
+        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, *Pend_it);
         comparaisons++;
         MainChain = InsertToMainChain(MainChain, Pend_it, *LowrBndIt, increment);
         Pend_it = Pend.begin() + x;
