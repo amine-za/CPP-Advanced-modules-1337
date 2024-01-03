@@ -1,4 +1,4 @@
-Name = ex02
+Name = PmergeMe
 
 CC = c++
 
