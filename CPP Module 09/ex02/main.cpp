@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 11:49:06 by azaghlou          #+#    #+#             */
-/*   Updated: 2024/01/04 12:12:00 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/01/04 22:25:56 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 
 int ArgsNum = 0;
 int comparaisons = 0;
+
+bool    duplicate_error(std::vector<int> vec)
+{
+    for(std::vector<int>::iterator it = vec.begin(); it < vec.end() - 1; it++)
+    {
+        if (*it == *(it + 1))
+        {
+            std::cerr << "Error: duplicate value\n";
+            return (true);
+        }
+    }
+    return (false);
+}
 
 bool    parsing(char **av)
 {
@@ -189,38 +202,53 @@ std::vector<int>    InsertToMainChain(std::vector<int> MainChain, std::vector<in
     }
     return (MainChain);
 }
+// 1 8 9 10 14
+bool    comp(int  V1, int V2)//8
+{
+    comparaisons++;
+    if (V1 > V2)
+        return (false);
+    return (true);
+}
 
 void    binary_search(std::vector<int> &MainChain, std::vector<int> &Pend, int increment, std::vector<int> &limit_vec)
 {
     std::vector<int> vec;
-    std::vector<int>::iterator Pend_it = Pend.begin() + increment - 1;
     std::vector<int>::iterator MainChain_it;
-    std::vector<int>::iterator limit_vec_it = limit_vec.begin();
-    // __unused std::vector<std::vector<int>::iterator>::iterator it_vec_it = it_vec.begin();
-    // for(std::vector<int>::iterator it = limit_vec.begin(); it < limit_vec.end(); it++)
-    // {
-    //     std::cout << *(it) << " - ";
-    // }
-    // std::cout << std::endl;
-    // exit(0);
+    __unused std::vector<int>::iterator limit_vec_it = limit_vec.begin();
+    std::vector<int>::iterator Pend_it = Pend.begin() + increment - 1;
+    unsigned int array[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
+    unsigned int *Jacobsthal = array;
+    
+    unsigned int x = 0;
     // for (int x = (increment*2) - 1; Pend_it < Pend.end(); x += increment)
-    for (int x = (increment*2) - 1; Pend_it < Pend.end(); x += increment)
+    std::cout << "pend size is: " << Pend.size() << std::endl;
+    std::cout << "number of pend elements is: " << Pend.size()/increment << std::endl;
+    while (Pend_it < Pend.end())
     {
+        // std::cout << "here\n";
+        // Pend_it = Pend.begin() + x;
         MainChain_it = MainChain.begin() + increment - 1;
-        for (; limit_vec.size() > 0 && MainChain_it < MainChain.end() && *MainChain_it <= *limit_vec_it; MainChain_it += increment)
+        if (x == 0 || x == *(Jacobsthal-1)-1)
         {
-            vec.push_back(*MainChain_it);
-            std::cout << *(vec.end() - 1) << " - ";
+            x = *(++Jacobsthal) - 1;
+            if (Pend.begin() + (increment * x) - 1 >= Pend.end())
+            {
+                x = (Pend.size() / increment);
+                if (x < *(Jacobsthal-1)) // the problem is here
+                    break;
+                std::cout << "x === " << x+1 << std::endl;
+            }
         }
-        std::cout << "\n\n";
-        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, *Pend_it);
-        comparaisons++;
+        limit_vec_it = limit_vec.begin() + x - 1; // jacobsthal in that too
+        for (; limit_vec.size() > 0 && MainChain_it < MainChain.end() && *MainChain_it <= *limit_vec_it; MainChain_it += increment)
+            vec.push_back(*MainChain_it);
+        Pend_it = Pend.begin() + (increment * x) - 1;
+        x--;
+        std::vector<int>::iterator LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, *Pend_it, comp);
         MainChain = InsertToMainChain(MainChain, Pend_it, *LowrBndIt, increment);
-        Pend_it = Pend.begin() + x;
-        limit_vec_it++;
         vec.clear();
     }
-    
 }
 
 void    recursive(std::vector<int> &vec, int &increment)
@@ -281,14 +309,13 @@ void    recursive(std::vector<int> &vec, int &increment)
                 break;
             it += increment * 2;
         }
-        std::cout << "HOOI\n";
         std::vector<int>::iterator MainChain_it = MainChain.begin() + (increment*3) - 1;
         it = vec.begin() + (increment * 3) - 1; // Note: May cause a seg, it needs an if condition, also the one up there
         while(it < vec.end())
         {
             pend = push_element(pend, it, increment);
             limit_vec.push_back(*MainChain_it);
-            std::cout << RED_TEXT << "Het is: " << *(limit_vec.end() - 1) << std::endl << RESET_TEXT;
+            // std::cout << RED_TEXT << "Het is: " << *(limit_vec.end() - 1) << std::endl << RESET_TEXT;
             if (it + increment + 1 == vec.end())
                 break;
             MainChain_it += increment;
@@ -307,6 +334,8 @@ void    recursive(std::vector<int> &vec, int &increment)
         print_vector(&vec, increment, "vector in the end");   // print
         increment /= 2;
     }
+    if (duplicate_error(vec))
+        exit(1);
 }
 
 int main(int ac, char **av)
