@@ -2,7 +2,7 @@ Name = PmergeMe
 
 CC = c++
 
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp
 
@@ -10,7 +10,7 @@ OBJ = $(SRC:.cpp=.o)
 
 all     : $(Name)
 
-$(Name) : $(OBJ)
+$(Name) : $(OBJ) 
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(Name)
 
 clean : 
