@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:25:55 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/29 16:55:26 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:03:04 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 std::string    *add_arg_to_array(std::string *array, std::string arg)
 {
-//  Function Description : that is  just a function that takes an argument and an array 
-//  and it create a copy of that array and add that argument to it and return the new one
+//  Description : A function that takes an argument and an array 
+//  and creates a copy of that array with adding that argument to it and return the new one
     static int i;
     std::string *new_array = new std::string[i+2];
 
@@ -77,7 +77,7 @@ std::string *tokenization(std::string input)
 
 bool    its_a_mathematical_expression(std::string str)
 {
-//  Function Description : A function to determine if the parameter represent a mathematical expression or not {+, -, *, /}
+//  Description : A function to determine if the parameter represent a mathematical expression or not {+, -, *, /}
     if (str == "+" || str == "-" || str == "*" || str == "/")
         return (true);
     return (false);
@@ -87,19 +87,13 @@ bool GoodOrganized(std::string *arguments)
 {
     int number = 0;
 
-    // if (arguments[1].empty() || arguments[2].empty())
-    //     return (false);
-    // if (!std::isdigit(arguments[0][0]) || (!arguments[1].empty() && !std::isdigit(arguments[1][0])))
-    //     return (false);
     for(int x = 0; !arguments[x].empty(); x++)
     {
         std::stringstream ss(arguments[x]);
-        // if (its_a_mathematical_expression(arguments[x]) && (arguments[x+1].empty() || its_a_mathematical_expression(arguments[x+1])))
-        //     return (false);
-        if(std::isdigit(arguments[x][0]) && (!(ss >> number) || number >= 10))
-            return (false);
-        // if (x > 0 && std::isdigit(arguments[x][0]) && !arguments[x+1].empty() && std::isdigit(arguments[x+1][0]))
-        //     return(false);
+        if(std::isdigit(arguments[x][0]) && !(ss >> number))
+            return (std::cerr << "Error: It appears that you entered some unordered arguments\n", false);
+        if (number >= 10)
+            return (std::cerr << "Error: A number is too big\n", false);
     }
     return (true);
 }
@@ -116,7 +110,7 @@ int main(int ac, char **av)
         return(std::cerr << "Error: It appears that you entered some unvalide characters\n", 1);
     std::string *arguments = tokenization(input);
     if (!GoodOrganized(arguments)) // Check if the arguments are organized well, i talk here about the order of the numbers and the mathematical expression
-        return(std::cerr << "Error: It appears that you entered some unordered arguments\n", 1);
+        return(1);
     for(int x = 0; !arguments[x].empty(); x++) // Calculating (The real work)
     {
         std::stringstream ss(arguments[x]);

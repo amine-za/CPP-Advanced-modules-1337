@@ -10,7 +10,7 @@ OBJ = $(SRC:.cpp=.o)
 
 all     : $(Name)
 
-$(Name) : $(OBJ)
+$(Name) : $(OBJ) RPN.hpp
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(Name)
 
 clean : 

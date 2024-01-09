@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 11:49:06 by azaghlou          #+#    #+#             */
-/*   Updated: 2024/01/08 21:56:14 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:44:26 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,50 +17,20 @@
 #include <chrono>
 
 #define RESET_TEXT "\033[0m"
-#define BLUE_TEXT "\033[34m"
 #define ORANGE_TEXT "\033[38;5;208m"
-#define RED_TEXT "\033[31m"
 
-template <typename T1, typename T2>
-void    print_vector(T1 &vec, int increment, std::string name);
 
 int ArgsNum = 0;
 int comparaisons = 0;
 
-bool check( std::vector<int> container, std::vector<int> copyContainer ) {
-
-    for (size_t i = 0; i < container.size(); i++) {
-        if (i + 1 < container.size() && container[i] > container[i + 1])
-            return(false);
-    }
-    for (size_t i = 0; i < container.size();) {
-        for (size_t j = 0; j < copyContainer.size(); j++) {
-            if (container[i] == copyContainer[j]) {
-                copyContainer.erase(copyContainer.begin() + j);
-                container.erase(container.begin() + i);
-                i = 0;
-                break;
-            }
-            else {
-                i++;
-                break;
-            }
-        }
-    }
-    if (container.empty() && copyContainer.empty())
-        return(true);
-    return(false);
-}
-
 template <typename T1, typename T2>
 void    duplicate_case(T1 vec)
 {
-    // print_vector<T1, T2>(vec, 1, "vec in dup");
     for(T2 it = vec.begin(); it < vec.end() - 1; it++)
     {
         if (*it == *(it + 1))
         {
-            std::cerr << "Error: duplicate value" << "\n";
+            std::cerr << "Error: duplicate value\n";
             exit(1);
         }
     }
@@ -120,23 +90,6 @@ void    inputToVector(char **av, T1 &vec)
             std::cerr << "An error appears while trying to converting from char * to int\n";
         vec.push_back(arg);
     }
-}
-
-template <typename T1, typename T2>
-void    print_vector(T1 &vec, int increment, std::string name)
-{
-    // int x = 0;
-    std::cout << ORANGE_TEXT << "The " << name << " is: \n" << RESET_TEXT << "[";
-    for(T2 it = vec.begin(); it != vec.end(); it++)
-    {
-        if ((it - vec.begin()) % increment == 0 && (it - vec.begin()) != 0)
-            std::cout << "]  \n[";
-        else if ((it - vec.begin()) != 0)
-            std::cout << "  ";
-        std::cout << *it;
-        // std::cout << "      " << ++x;
-    }
-    std::cout << "]\n\n";
 }
 
 template <typename T2>
@@ -214,7 +167,6 @@ T1    InsertToMainChain(T1 MainChain, T2 Pend_it, int bound, int increment)
             {
                 MainChain.insert(MainChain_it, *(Pend_it - x));
                 MainChain_it = MainChain.begin() + dist;
-                // std::advance(MainChain_it, dist);
             }
             break;
         }
@@ -239,30 +191,20 @@ void    insertion(T1 &MainChain, T1 &Pend, int increment, T1 &limit_vec)
     T2 MainChain_it;
     T2 limit_vec_it = limit_vec.begin();
     T2 Pend_it = Pend.begin() + increment - 1;
-    // std::advance(Pend_it, increment - 1);
     unsigned int array[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
     unsigned int *Jacobsthal = array;
     unsigned int x = 0;
     int num = limit_vec.size();
-    print_vector<T1, T2>(MainChain, increment, "MainChain");
-    print_vector<T1, T2>(Pend, increment, "Pend");
-    print_vector<T1, T2>(limit_vec, increment, "limit_vec");
     while (num != 0)
     {
         MainChain_it = MainChain.begin() + increment - 1;
-        // std::advance(MainChain_it, increment - 1);
         if (x == 0 || x == *(Jacobsthal-1)-1)
         {
             x = *(++Jacobsthal) - 1;
             if (Pend.size() < (increment * x) - 1 || Pend.size() == 1)
-            {
                 x = (Pend.size() / increment);
-                // if (x < *(Jacobsthal-1))
-                //     break;
-            }
         }
         limit_vec_it = limit_vec.begin() + x - 1;
-        // std::advance(limit_vec_it, x - 1);
         if (limit_vec_it >= limit_vec.end())
             limit_vec_it = limit_vec.end() - 1;
         for (; limit_vec.size() > 0 && MainChain_it < MainChain.end() && *MainChain_it <= *limit_vec_it; MainChain_it += increment)
@@ -270,33 +212,20 @@ void    insertion(T1 &MainChain, T1 &Pend, int increment, T1 &limit_vec)
         Pend_it = Pend.begin() + (increment * x) - 1;
         if (Pend_it >= Pend.end())
             Pend_it = Pend.end() - 1;
-        std::cout << "pend it = " << *Pend_it << std::endl;
-        // std::advance(Pend_it, (increment * x) - 1);
-        if (Pend.size() == 1)
-            Pend_it = Pend.begin();
-        // if (Pend_it >= Pend.end())
-        //     break;
-        
-            // limit_vec_it = limit_vec.end() - 1;
         x--;
         T2 LowrBndIt = std::lower_bound(vec.begin(), vec.end() - 1, *Pend_it, comp);
         MainChain = InsertToMainChain(MainChain, Pend_it, *LowrBndIt, increment);
         vec.clear();
         num--;
     }
-    std::cout << "-----------\n";
 }
 
 template <typename T1, typename T2>
 void    sorting(T1 &vec, int &increment)
 {
-    // print_vector<T1, T2>(vec, increment, "vec in sort");
-    // exit(0);
     T1 rest;
     T2 arg1 = vec.begin() + increment - 1;
-    // std::advance(arg1, increment - 1);
     T2 arg2 = vec.begin() + (increment*2) - 1;
-    // std::advance(arg2, (increment*2) - 1);
     while(1)
     {
         if (arg1 + 1 == vec.end())
@@ -322,7 +251,6 @@ void    sorting(T1 &vec, int &increment)
     T1 pend;
     T1 limit_vec;
     T2 it = vec.begin() + increment - 1;
-    // std::advance(it, increment - 1);
 
 
     MainChain = push_element(MainChain, it, increment);
@@ -337,9 +265,7 @@ void    sorting(T1 &vec, int &increment)
         it += increment * 2;
     }
     T2 MainChain_it = MainChain.begin() + (increment*3) - 1;
-    // std::advance(MainChain_it, (increment*3) - 1);
     it = vec.begin() + (increment*3) - 1;
-    // std::advance(it, (increment * 3) - 1);
     while(it < vec.end())
     {
         pend = push_element(pend, it, increment);
@@ -370,31 +296,22 @@ int main(int ac, char **av)
         return (std::cerr << "Error: No arguments\n", 1);       //
     if (parsing(&av[1]))                                        //      Error handling    
         return (std::cerr << "Error: unvalide arguments\n", 1); //
-    inputToVector<std::vector<int> >(av, vec_before);                  //      Converting the input to a vector
+    inputToVector<std::vector<int> >(av, vec_before);                  //     Converting the input to a vector
     ArgsNum = vec_before.size();
     {//---------------------------------------------------------------------------std::vector---------------------------------------------------------------------------
         std::vector<int> vec = vec_before;
-        // print_vector<std::vector<int>, std::vector<int>::iterator>(vec, increment, "vec");
-        // exit(0);
         increment = 1;
-        std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now(); // storing the time in the begin of the work
         
+        std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now(); // storing the time in the begin of the work
         if (ArgsNum > 1)
             sorting<std::vector<int>, std::vector<int>::iterator>(vec, increment);     // The real work function
         std::chrono::time_point<std::chrono::high_resolution_clock> stop = std::chrono::high_resolution_clock::now(); // Storing the time in the end of the work
         duplicate_case<std::vector<int>, std::vector<int>::iterator>(vec);            // Checking if there is any duplicates numbers
-        // // check
-        // if (check(vec, vec_before))
-        //     std::cout << "<<<<<ALL GOOD>>>>" << std::endl;
-        // else
-        //     std::cout << "<<<<oo0OOPS>>>>" << std::endl;
-        // // end check
         
         std::cout << ORANGE_TEXT << "Before:   " << RESET_TEXT;                                 //
         for(std::vector<int>::iterator it = vec_before.begin(); it < vec_before.end(); it++)    //      Printing the
             std::cout << *it << " ";                                                            //      input before sorting
         std::cout << std::endl;                                                                 //
-
 
         std::cout << ORANGE_TEXT << "After:    " << RESET_TEXT;                     //
         for(std::vector<int>::iterator it = vec.begin(); it < vec.end(); it++)      //      Printing the
@@ -403,20 +320,21 @@ int main(int ac, char **av)
 
         std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start); // Calculating the time that the work takes
         std::cout << ORANGE_TEXT << "Time to process a range of " << vec.size() << " elements with std::vector : " << RESET_TEXT << duration.count() << " us\n"; // Printing the time
-        // std::cout << ORANGE_TEXT << "comparaisons = " << comparaisons << std::endl << RESET_TEXT;
+        std::cout << ORANGE_TEXT << "comparaisons = " << RESET_TEXT << comparaisons << std::endl;
     }
     {//---------------------------------------------------------------------------std::deque---------------------------------------------------------------------------
         increment = 1;
-        for(std::vector<int>::iterator it = vec_before.begin(); it != vec_before.end(); it++)      //      Converting the vector to a deque
-            deq.push_back(*it);                                                     //      
-        std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now(); // storing the time in the begin of the work
+        comparaisons = 0;
+        for(std::vector<int>::iterator it = vec_before.begin(); it != vec_before.end(); it++)      // Converting the vector to a deque
+            deq.push_back(*it);                                                                    //   
         
+        std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now(); // storing the time in the begin of the work
         if (ArgsNum > 1)
             sorting<std::deque<int>, std::deque<int>::iterator>(deq, increment);       // The real work function
         std::chrono::time_point<std::chrono::high_resolution_clock> stop = std::chrono::high_resolution_clock::now(); // Storing the time in the end of the work
 
         std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start); // Calculating the time that the work takes
-        std::cout << ORANGE_TEXT << "Time to process a range of " << ArgsNum << " elements with std::deque : " << RESET_TEXT << duration.count() << " us\n"; // Printing the time
-        // std::cout << ORANGE_TEXT << "comparaisons = " << comparaisons << std::endl << RESET_TEXT;
+        std::cout << ORANGE_TEXT << "Time to process a range of " << ArgsNum << " elements with std::deque  : " << RESET_TEXT << duration.count() << " us\n"; // Printing the time
+        std::cout << ORANGE_TEXT << "comparaisons = " << RESET_TEXT << comparaisons << std::endl;
     }
 }

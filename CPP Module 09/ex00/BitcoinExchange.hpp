@@ -4,9 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include <vector>
 #include <sstream>
-#include <limits>
 #include <ctime>
 
 
@@ -19,8 +17,7 @@ void            print_result(std::string line, std::map<std::string, float> Map)
 bool            leapTrueFalse(int year);
 void            DoTheRealWork(std::map<std::string, float> Map, std::string input);
 
-bool    valide_date( int *date, std::map<std::string, float> Map,  std::string line, bool &leap_year);
-int    date_to_int_array(std::string line, int *date);
-float   get_input_value(std::string line);
+bool            valide_date( int *date, std::map<std::string, float> Map,  std::string line, bool &leap_year);
+int             date_to_int_array(std::string line, int *date);
 
 #endif

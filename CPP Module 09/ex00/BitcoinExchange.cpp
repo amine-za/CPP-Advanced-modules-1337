@@ -6,11 +6,27 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:31:49 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/12/01 10:11:05 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:54:04 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+std::string RmSpaceInEnd(std::string line)
+{
+//  Description : A function that remove the spaces in the end of a string
+    std::string str;
+    int x = line.size() - 1;
+
+    while(line[x] == ' ')
+    {
+        line[x] = '\0';
+        x--;
+    }
+    for(int x = 0; line[x]; x++)
+        str += line[x];
+    return (str);
+}
 
 bool    hasNonDigitCharacters(std::string line)
 {
@@ -18,13 +34,13 @@ bool    hasNonDigitCharacters(std::string line)
 //  Return value : The true return represent that it have something else.
     for(int x = 0; line[x]; x++)
     {
-        if (!std::isdigit(line[x]))
+        if (!std::isdigit(line[x]) && line[x] != '.')
             return (true);
     }
     return (false);
 }
 
-bool    valide_date( int *date, std::map<std::string, float> Map,  std::string line, bool *leap_year)
+bool    valide_date( int *date, bool *leap_year)
 {
 //  Function description : A function that check if the date is valide in the month days condition and handle the future date condition 
     
@@ -44,8 +60,12 @@ bool    valide_date( int *date, std::map<std::string, float> Map,  std::string l
         return (std::cerr << "Error: That month day is wrong\n", true);
     if (date[0] > year || (date[0] == year && date[1] > month ) || (date[0] == year && date[1] == month && date[2] > day))
     {
-        std::cerr << "Error: I can't see the future but here is the result depending on the last date data => " << 
-            get_input_value(line) * Map["2022-03-29,47115.93"];
+        std::cerr << "Error: I can't see the future\n";
+        return (true);
+    }
+    if (date[0] < 2009 || (date[0] == 2009 && date[1] < 1 ) || (date[0] == 2009 && date[1] == 1 && date[2] < 2))
+    {
+        std::cerr << "Error: bad input => " << date[0] << "-" << date[1] << "-" << date[2] << std::endl;
         return (true);
     }
     *leap_year = leapTrueFalse(date[0]);
@@ -86,10 +106,11 @@ int form_check(std::string line)
         if (line[13] == '-')
             return (std::cerr << "Error: not a positive number.\n", 1);
         if (!(ss >> var) || hasNonDigitCharacters(&line[13]))
-            return (std::cerr << "Error: unvalide value\n", 1);
+            return (std::cerr << "Error: unvalide value\n" << var << "\n", 1);
     }
     return (0);
 }
+// 2011-01-03 => 1.2 = 0.36
 
 int    date_to_int_array(std::string line, int *date)
 {
@@ -106,8 +127,8 @@ int    date_to_int_array(std::string line, int *date)
     std::stringstream ss1(array[0]);
     std::stringstream ss2(array[1]);
     std::stringstream ss3(array[2]);
-    if (!(ss1 >> date[0]) || !(ss2 >> date[1]) || !(ss3 >> date[2]))
-        return (std::cerr << "Error: unvalide da00te\n", 1);    // here is the problem
+    if (!(ss1 >> date[0]) || !(ss2 >> date[1]) || !(ss3 >> date[2]) || date[1] == 0)
+        return (std::cerr << "Error: unvalide date\n", 1);    // here is the problem
     return (0);
 }
 
@@ -118,17 +139,6 @@ std::string get_date(std::string line)
     for(int x = 10; date[x]; x++)
         date[x] = '\0';
     return (date);
-}
-
-float   get_input_value(std::string line)
-{    
-    float   value;
-
-    line = &line[13];
-    std::stringstream   ss(line);
-    if (!(ss >> value)) // converting the string that contain the number to a float
-        std::cerr << "An error appearse while triying to get the value00000\n";
-    return (value);
 }
 
 float   get_data_value(std::string line)
@@ -164,18 +174,25 @@ void    print_result(std::string line, std::map<std::string, float> Map)
 {
 //  Function description : A function that check if the input value is too high and calcule and print the result
 
-    float  result;                                      // The result of (quantity * value)
-    float  bitcoin_quantity = get_input_value(line);   // How many bitcoin the user have.
-    std::map<std::string, float>::iterator it = (Map.lower_bound(get_date(line)));
+    float  result;                 // The result of (quantity * value)
+    std::string str = &line[13];   // How many bitcoin the user have.
+    std::stringstream ss(str);
+    float bitcoin_quantity;
 
-    if (it != Map.begin() && it->first != get_date(line))
+    if (!(ss >> bitcoin_quantity)) // converting the string that contain the number to a float
+        return (std::cerr << "No value entered\n", void());
+    int date[3];
+    date_to_int_array(line, &date[0]);
+    std::map<std::string, float>::iterator it = (Map.lower_bound(get_date(line)));
+    if (date[0] >= 2022 || (date[0] >= 2022 && date[1] >= 3) || (date[0] >= 2022 && date[1] >= 3 && date[2] >= 29))
+        it--;
+    else if (it != Map.begin() && it->first != get_date(line))
         it--;
     result = (float)bitcoin_quantity * (float)(it->second);
-    // std::cout << "                  quantity : " << bitcoin_quantity << " value : " << it->second << std::endl;
-    if (get_input_value(line) > 1000)
+    if (bitcoin_quantity > 1000)
         std::cerr << "Error: too large a number." << std::endl;
     else if (bitcoin_quantity >= 0)
-        std::cout << get_date(line) << " => " << get_input_value(line) << " = " << result << std::endl;
+        std::cout << get_date(line) << " => " << bitcoin_quantity << " = " << result << std::endl;
     else
         std::cerr << "Error: not a positive number.\n";
 }
@@ -190,6 +207,7 @@ void    DoTheRealWork(std::map<std::string, float> Map, std::string input_file)
     if (!file.is_open())
         std::cerr << "Error: it appears that there is something wrong with the parameter you entered\n";
     std::getline(file, line);
+    line = RmSpaceInEnd(line);
     if (line != "date | value\n" && line != "date | value" && line != "")
         std::cerr << "Error: first line form error\n";
     if (file.eof())
@@ -199,9 +217,12 @@ void    DoTheRealWork(std::map<std::string, float> Map, std::string input_file)
         if (file.eof())
             break;
         std::getline(file, line);
+        line = RmSpaceInEnd(line);
+        if (line.empty())
+            continue;
         if (form_check(line)){}
         else if (date_to_int_array(line, &date[0])){}
-        else if (valide_date(date, Map, line, &leap_year)){}
+        else if (valide_date(date, &leap_year)){}
         else if (date[1] < 1 || date[1] > 12 || date[2] < 1 || date[2] > 31)
             std::cerr << "Error: bad input => " << line << std::endl;
         else if (date[1] == 2 && ((leap_year == true && date[2] > 29) || (leap_year == false && date[2] > 28)))
@@ -210,3 +231,4 @@ void    DoTheRealWork(std::map<std::string, float> Map, std::string input_file)
             print_result(line, Map);
     }
 }
+// 2011-01-03 => 1.2 = 0.36
