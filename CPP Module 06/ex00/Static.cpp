@@ -6,15 +6,14 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:04 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/08 13:38:26 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:30:56 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Static.hpp"
 
 Static::Static()
-{
-    
+{ 
 }
 
 Static::Static(Static &obj)

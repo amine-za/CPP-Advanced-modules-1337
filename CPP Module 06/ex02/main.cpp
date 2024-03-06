@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:25:10 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/02 17:03:30 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:07:02 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <c
 
 Base *generate(void)
 {
@@ -22,6 +23,8 @@ Base *generate(void)
     std::uniform_int_distribution<int> dist(1,3);
 
     random_number = dist(rand);
+rand();
+    
     if (random_number == 1)
         return (new A());
 

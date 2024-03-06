@@ -6,7 +6,7 @@
 /*   By: azaghlou <azaghlou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 12:43:55 by azaghlou          #+#    #+#             */
-/*   Updated: 2023/11/08 13:25:54 by azaghlou         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:51 by azaghlou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include <cfloat>
 
 int main(int ac, char **av)
-{   
-    // char s[9] = "999999.5";
+{
+    float f = 5.;
+    std::cout << "f = " << f << std::endl;
     if (ac == 2)
         Static::convert(av[1]);
     else if (ac == 1)
