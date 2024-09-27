@@ -21,8 +21,8 @@ This repository contains the C++ modules completed as part of the CPP Advanced c
   - Topics Covered: STL - Templates
 
 - **Module 09**: https://github.com/aminezagh/CPP-Advanced-modules-1337/tree/main/CPP%20Module%2009
-  - Description: This module is about understanding the Containers in CPP. 
-  - Topics Covered: Containers in C++.
+  - Description: This module is about understanding the Containers in CPP and testing yourself with algorithms.
+  - Topics Covered: Ford-Johnson algorithm - Containers in C++.
 
 ## Acknowledgments
 
